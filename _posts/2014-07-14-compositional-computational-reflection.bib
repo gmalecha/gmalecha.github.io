@@ -1,0 +1,34 @@
+---
+layout: publication
+categories: publication
+title: Compositional Computational Reflection
+authors: Gregory Malecha, Thomas Braibant, and Adam Chlipala
+tags:
+- mirror-core
+- coq
+- computational reflection
+- automation
+abstract: |
+  Current work on computational reflection is single-minded; each reflective procedure is written with a specific application or scope in mind. Composition of these reflective procedures is done by a proof- generating tactic language such as Ltac. This composition, however, comes at the cost of both larger proof terms and redundant preprocessing. In this work, we propose a methodology for writing composable reflective procedures that solve many small tasks in a single invocation. The key technical insights are techniques for reasoning semantically about extensible syntax in intensional type theory. Our techniques make it possible to compose sound procedures and write generic procedures parametrized by lemmas mimicking Coq’s support for hint databases.
+links:
+ - download: http://www.people.fas.harvard.edu/~gmalecha/pub/ccr-itp14.pdf
+ - slides: http://www.people.fas.harvard.edu/~gmalecha/pub/malecha-itp14-slides.pdf
+ - publisher's link: http://link.springer.com/chapter/10.1007%2F978-3-319-08970-6_24
+ - conference link: http://www.cs.uwyo.edu/~ruben/itp-2014/
+---
+@incollection{
+  year={2014},
+  isbn={978-3-319-08969-0},
+  booktitle={Interactive Theorem Proving},
+  volume={8558},
+  series={Lecture Notes in Computer Science},
+  editor={Klein, Gerwin and Gamboa, Ruben},
+  doi={10.1007/978-3-319-08970-6_24},
+  title={Compositional Computational Reflection},
+  url={http://dx.doi.org/10.1007/978-3-319-08970-6_24},
+  publisher={Springer International Publishing},
+  keywords={Computational reflection; automation; Coq; verification},
+  author={Malecha, Gregory and Chlipala, Adam and Braibant, Thomas},
+  pages={374-389},
+  language={English}
+}

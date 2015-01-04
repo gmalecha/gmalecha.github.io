@@ -1,0 +1,37 @@
+div#Menu {
+    width: 150pt;
+    background-color: white;
+    position: fixed;
+    right: 3pt;
+    top: 43pt;
+}
+
+div#Menu th {
+    text-align: left;
+}
+div#Menu td {
+    text-align: left;
+}
+
+div#Menu hr {
+    width: 90%;
+    color: black;
+    background-color: black;
+}
+
+div#Menu img#Preview {
+    width: 130px;
+    margin-left: 10px;
+    margin-top: -5px;
+}
+
+div#Board {
+    background-color: #ddd;
+    width: 100%;
+    height: 98%;
+}
+
+div#Board svg {
+    background-color: #ddd;
+    float: left;
+}

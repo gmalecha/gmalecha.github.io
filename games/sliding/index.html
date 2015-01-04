@@ -1,0 +1,28 @@
+---
+category: games
+layout: page
+extra_css: css/slidingtile.css
+extra_js:
+- js/SlidingTile.js
+- js/script.js
+---
+
+<center>
+  <div id="puzzle_frame" class="puzzle_frame"
+       style="border: 2px ridge; width: 400pt">
+    <div id="puzzle_div" style="width: 400pt; height: 300pt">
+    </div>
+  </div>
+</center>
+
+<form name="information">
+  Image Url: <input type="input" id="image_url"
+		    value="http://www.google.com/intl/en_ALL/images/logo.gif"
+		    size="45" /><br />
+  Tiles: <input type="input" id="tile_x" value="5" size="3" /> x
+  <input type="input" id="tile_y" value="3" size="3" /> <br />
+  Dimensions: <input type="input" id="puzzle_width" value="400pt" /> x
+  <input type="input" id="puzzle_height" value="200pt" /> <br />
+  <a href="#" onclick="updateFromDocument();">Update Information</a>
+  <a href="#" onclick="randomizePuzzle(puz);">Shuffle</a>
+</form>

@@ -1,0 +1,30 @@
+---
+layout: publication
+category: publication
+title: A More Precise Security Type System for Dynamic Security Tests
+authors: Gregory Malecha and Stephen Chong
+abstract: |
+  The move toward publically available services that store private information has increased the importance of tracking information flow in applications. For example, network systems that store credit-card transactions and medical records must be assured to maintain the confidentiality and integrity of this information. One way to ensure this is to use a language that supports static reasoning about information flow in the type system. While useful in practice, current type systems for checking information flow are imprecise, unnecessarily rejecting safe programs. This annoys programmers and often results in increased code complexity in order to work around these artificial limitations. In this work, we present a new type system for statically checking information flow properties of imperative programs with exceptions. Our key insight is to propagate a context of exception handlers and check exceptions at the throw point rather than propagating exceptions outward and checking them at the catch sites. We prove that our type system guarantees the standard non-interference condition and that it is strictly more permissive than the existing type system for Jif, a language that extends the Java type system to reason about information flow.
+links:
+- tech report: http://www.people.fas.harvard.edu/~gmalecha/pub/jif-types-tr.pdf
+- original: http://www.people.fas.harvard.edu/~gmalecha/pub/malecha-plas10.pdf
+- publisher's link: http://portal.acm.org/citation.cfm?id=1814217.1814221
+---
+@inproceedings{malecha2010more-precise,
+ author = {Malecha, Gregory and Chong, Stephen},
+ title = {A More Precise Security Type System for Dynamic Security Tests},
+ booktitle = {Proceedings of the 5th ACM SIGPLAN Workshop on Programming Languages and Analysis for Security},
+ series = {PLAS '10},
+ year = {2010},
+ isbn = {978-1-60558-827-8},
+ location = {Toronto, Canada},
+ pages = {4:1--4:12},
+ articleno = {4},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1814217.1814221},
+ doi = {10.1145/1814217.1814221},
+ acmid = {1814221},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ abstract={The move toward publically available services that store private information has increased the importance of tracking information flow in applications. For example, network systems that store credit-card transactions and medical records must be assured to maintain the confidentiality and integrity of this information. One way to ensure this is to use a language that supports static reasoning about information flow in the type system. While useful in practice, current type systems for checking information flow are imprecise, unnecessarily rejecting safe programs. This annoys programmers and often results in increased code complexity in order to work around these artificial limitations. In this work, we present a new type system for statically checking information flow properties of imperative programs with exceptions. Our key insight is to propagate a context of exception handlers and check exceptions at the throw point rather than propagating exceptions outward and checking them at the catch sites. We prove that our type system guarantees the standard non-interference condition and that it is strictly more permissive than the existing type system for Jif, a language that extends the Java type system to reason about information flow.}
+}

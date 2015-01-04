@@ -1,0 +1,32 @@
+---
+layout: publication
+categories: publication
+title: |
+  MirrorShard: Proof by Computational Reflection with Verified Hints
+authors: Gregory Malecha, Adam Chlipala, Thomas Braibant, Patrick Hulin, and Edward Yang
+tags:
+- mirror-shard
+- coq
+- computational reflection
+- automation
+abstract: |
+  We describe a method for building composable and extensible verification procedures within the Coq proof assistant. Unlike traditional methods that rely on run-time generation and checking of proofs, we use verified-correct procedures with Coq soundness proofs. Though they are internalized in Coq's logic, our provers support sound extension by users with hints over new domains, enabling automated reasoning about user-defined abstract predicates. We maintain soundness by developing an architecture for modular packaging, construction, and composition of hint databases, which had previously only been implemented in Coq at the level of its dynamically typed, proof-generating tactic language. Our provers also include rich handling of unification variables, enabling integration with other tactic-based deduction steps within Coq. We have implemented our techniques in MirrorShard, an open-source framework for reflective verification. We demonstrate its applicability by instantiating it to separation logic in order to reason about imperative program verification.
+links:
+- download: http://arxiv.org/pdf/1305.6543v1
+- publisher's link: http://arxiv.org/abs/1305.6543
+---
+@article{malecha2013mirror-shard,
+  author    = {Gregory Malecha and
+               Adam Chlipala and
+               Thomas Braibant and
+               Patrick Hulin and
+               Edward Z. Yang},
+  title     = {MirrorShard: Proof by Computational Reflection with Verified Hints},
+  journal   = {CoRR},
+  volume    = {abs/1305.6543},
+  year      = {2013},
+  url       = {http://arxiv.org/abs/1305.6543},
+  timestamp = {Sun, 02 Jun 2013 20:48:21 +0200},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/journals/corr/abs-1305-6543},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}

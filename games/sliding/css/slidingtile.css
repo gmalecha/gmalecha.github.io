@@ -1,0 +1,10 @@
+.puzzle_frame
+  { background-color: #ddd; border: 2pt ridge; text-align: left;
+    overflow: hidden; }
+
+.puzzle_piece
+  { position: relative; border: 1pt ridge gray; overflow: hidden;
+    z-index: 10;}
+
+.puzzle_piece img
+  { position: relative; }

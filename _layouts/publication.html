@@ -1,0 +1,19 @@
+---
+layout: page
+---
+<article class="post-header">
+  <h3 class="authors">{{ page.authors }}</h3>
+  <p>{{ page.abstract }}</p>
+  {% if page.links %}
+  <p>[ {% for hash in page.links %}
+    {% for lnk in hash %}
+    <a href="{{ lnk[1] }}">{{ lnk[0] }}</a>
+    {% endfor %}{% if forloop.last == false %} |{% endif %}
+    {% endfor %} ]
+  </p>
+  {% endif %}
+
+  {% for tg in page.tags %}
+  <span class="label label-default">{{ tg }}</span>
+  {% endfor %}
+</article>

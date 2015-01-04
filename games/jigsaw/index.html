@@ -1,0 +1,57 @@
+---
+category: games
+layout: default
+extra_css: css/jigsaw.css
+extra_js:
+- js/Drag.js
+- js/Geom.js
+- js/Curves.js
+- js/Puzzle.js
+- js/PuzzleBuilder.js
+- js/script.js
+---
+<div id="Menu">
+  <center>
+    <form class="form-inline">
+      <div class="form-group">
+	<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+	<div class="input-group">
+	  <div class="input-group-addon">rows</div>
+	  <input id="rows" value="3" maxlength="2" type="text"
+		 class="form-control" placeholder="rows" />
+	</div>
+	<div class="input-group">
+	  <div class="input-group-addon">cols</div>
+	  <input id="cols" value="3" maxlength="2" type="text"
+		 class="form-control" placeholder="columns" />
+	</div>
+	<div class="input-group">
+	  <div class="input-group-addon">URL</div>
+	  <input maxlength="2" type="text"
+		 class="form-control" placeholder="url"
+		 id="img_url" type="text" size="18"
+		 value="http://www.seas.harvard.edu/profdev/seal.jpg" />
+	</div>
+
+      </div>
+      <button class="btn btn-primary"
+	      onclick="create()" value="Recreate Puzzle">Recreate Puzzle</button>
+      <button class="btn btn-primary"
+	      onclick="scramblePuzzle(document.getElementById('Board').puzzle)" value="Scrabble">Scrabble</button>
+    </form>
+  </center>
+  <hr />
+  <center>
+    <img id="Preview" src="http://www.seas.harvard.edu/profdev/seal.jpg" />
+  </center>
+  <br />
+  <b>Pieces Remaining:</b> <span id="PieceCount"></span>
+</div>
+<div id="Board">
+  <svg id="BoardSVG"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 800 800"
+       width="100%" height="100%">
+    <g id="Puzzle" />
+  </svg>
+</div>

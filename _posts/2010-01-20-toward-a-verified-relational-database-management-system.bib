@@ -1,0 +1,34 @@
+---
+layout: publication
+categories: publication
+title: Toward a verified relational database management system
+authors: Gregory Malecha, Greg Morrisett, Avraham Shinnar, and Ryan Wisnesky
+tags:
+- ynot
+- coq
+- b+ tree
+- separation logic
+abstract: |
+  We report on our experience implementing a lightweight, fully verified relational database management system (RDBMS). The functional specification of RDBMS behavior, RDBMS implementation, and proof that the implementation meets the specification are all written and verified in Coq. Our contributions include: (1) a complete specification of the relational algebra in Coq; (2) an efficient realization of that model (B+ trees) implemented with the Ynot extension to Coq; and (3) a set of simple query optimizations proven to respect both semantics and run-time cost. In addition to describing the design and implementation of these artifacts, we highlight the challenges we encountered formalizing them, including the choice of representation for finite relations of typed tuples and the challenges of reasoning about data structures with complex sharing. Our experience shows that though many challenges remain, building fully-verified systems software in Coq is within reach.
+links:
+ - download: http://ynot.cs.harvard.edu/papers/popl10.pdf
+ - publisher's link: http://dl.acm.org/citation.cfm?id=1707801.1706329
+ - conference link: http://www.cse.psu.edu/popl/10/
+---
+@inproceedings{malecha2010rdbms,
+ author = {Malecha, Gregory and Morrisett, Greg and Shinnar, Avraham and Wisnesky, Ryan},
+ title = {Toward a Verified Relational Database Management System},
+ booktitle = {Proceedings of the 37th Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages},
+ series = {POPL '10},
+ year = {2010},
+ isbn = {978-1-60558-479-9},
+ location = {Madrid, Spain},
+ pages = {237--248},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1706299.1706329},
+ doi = {10.1145/1706299.1706329},
+ acmid = {1706329},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {b+ tree, dependent types, relational model, separation logic},
+}
