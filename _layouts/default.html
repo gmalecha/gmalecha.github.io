@@ -48,13 +48,14 @@
 	  </ul>
           <ul class="nav navbar-nav navbar-right">
 	    <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Proof Work<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-		<li><a href="#ext-lib">ExtLib</a></li>
-		<li><a href="/mirror-core/">MirrorCore</a></li>
-		<li><a href="#proof-forge">Proof Forge</a></li>
-		<li><a href="#template-coq">TemplateCoq</a></li>
-		<li><a href="#plugin-utils">Plugin Utils</a></li>
+		<li><a href="//github.com/coq-ext-lib/coq-ext-lib">ExtLib</a></li>
+		<li><a href="//github.com/gmalecha/mirror-core">MirrorCore</a></li>
+{% comment %}	<li><a href="#proof-forge">Proof Forge</a></li> {% endcomment %}
+		<li><a href="//github.com/gmalecha/template-coq">TemplateCoq</a></li>
+		<li><a href="//github.com/gmalecha/coq-plugin-utils">Plugin Utils</a></li>
+		<li><a href="//github.com/ynot-harvard/ynot">Ynot</a></li>
               </ul>
             </li>
 	    <li class="dropdown">
@@ -64,7 +65,9 @@
 		<li><a href="/games/sliding/">Sliding Tile</a></li>
               </ul>
             </li>
+{% comment %}
 	    <li{% if page.category == 'ceramics' or page.url == '/ceramics/index.html' %} class="active"{% endif %}><a href="/ceramics/">Ceramics</a></li>
+{% endcomment %}
           </ul>
         </div>
       </div>
