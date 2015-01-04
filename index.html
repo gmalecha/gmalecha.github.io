@@ -1,53 +1,45 @@
 ---
 layout: default
 ---
-    <div class="jumbotron">
-      <div class="container">
-      <div class="col-md-1"></div>
-      <div class="col-md-2">
-	<img class="img-rounded"
-	     src="http://www.people.fas.harvard.edu/~gmalecha/gregory.jpg"
-	     width="150pt" />
-      </div>
-      <div class="col-md-6">
-	<div class="container">
-	  <div class="row">
-	    <div class="col-md-12"><h2>gregory malecha</h2></div>
-	  </div>
-	  <div class="row">
-	    <div class="col-md-12">gmalecha at cs.harvard.edu</div>
-	  </div>
-	</div>
-      </div>
-      <div class="col-md-2">
-	<center>
-	<img src="https://festival.sdaff.org/2012/files/2012/09/UCSD.gif"
-	     height="80pt" />
-	<br/><br/>
-	<img src="http://www.people.fas.harvard.edu/~gmalecha/SEAS_logo.png"
-	     height="80pt" />
-	</center>
-      </div>
-      <div class="col-md-1"></div>
-      </div>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-offset-0 col-xs-8 col-sm-6 col-sm-offset-2">
+      <img class="img-rounded"
+	   src="http://www.people.fas.harvard.edu/~gmalecha/gregory.jpg"
+	   width="150pt" style="float:left; clear: left; margin-right: 10pt;"/>
+      <h2>gregory malecha</h2>
+      gmalecha at cs.harvard.edu
     </div>
+    <div class="col-xs-4 col-sm-2 col-md-pull-0 text-center">
+      <img src="https://festival.sdaff.org/2012/files/2012/09/UCSD.gif"
+	   height="80pt" />
+      <br/><br/>
+      <img src="http://www.people.fas.harvard.edu/~gmalecha/SEAS_logo.png"
+	   height="80pt" />
+    </div>
+    </div>
+  </div>
+</div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <h2>ExtLib</h2>
-          <p>ExtLib reinvisions the Coq standard library to be a little more Haskell like. It focuses on first-class abstractions, organized (rather than organic) library layout, and mostly non-dependent types.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2>MirrorCore</h2>
-          <p>MirrorCore is my thesis work on making computational reflection compositional. It features a higher-order extensible reflective language as well as a fully-reflective tactic language similar to Ltac.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2>Proof Forge</h2>
-          <p>Proof forge is a collection of tools for building proofs.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-    </div> <!-- /container -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 col-lg-3 col-lg-offset-3">
+      <h2 class="text-center">ExtLib</h2>
+      <p class="text-center">ExtLib reinvisions the Coq standard library to be a little more Haskell like. It focuses on first-class abstractions, organized (rather than organic) library layout, and mostly non-dependent types.</p>
+      <p class="text-center"><a class="btn btn-default" href="//github.com/coq-ext-lib/coq-ext-lib#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+      <h2 class="text-center">MirrorCore</h2>
+      <p class="text-center">MirrorCore is my thesis work on making computational reflection compositional. It features a higher-order extensible reflective language as well as a fully-reflective tactic language similar to Ltac.</p>
+      <p class="text-center"><a class="btn btn-default" href="//github.com/gmalecha/mirror-core" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      {% comment %}
+      <h2 class="text-centered">Proof Forge</h2>
+      <p>Proof forge is a collection of tools for building proofs.</p>
+      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      {% endcomment %}
+    </div>
+  </div>
+</div>
