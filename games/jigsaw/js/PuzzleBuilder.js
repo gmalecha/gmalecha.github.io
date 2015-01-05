@@ -23,7 +23,7 @@ function makePuzzle(puz, rows, cols, updateCount) {
   var dims = puz.dimensions();
   var width = dims.x;
   var height = dims.y;
-  
+
   // Make corners
   for (var r = 0; r <= rows; r++) {
     for (var c = 0; c <= cols; c++) {
@@ -32,14 +32,14 @@ function makePuzzle(puz, rows, cols, updateCount) {
       nodes.push(puz.createNode(x, y));
     }
   }
-  
+
   // The edges
   var edgeCurve = curves.LineCurve([new Pt(0.,0.),new Pt(1.,0.)]);
   for (r = 0; r < rows; r++) {
     puz.createEdge(nodes[r * (cols + 1)],
 		   nodes[(r+1) * (cols + 1)],
 		   edgeCurve);
-    puz.createEdge(nodes[r * (cols + 1) + cols], 
+    puz.createEdge(nodes[r * (cols + 1) + cols],
 		   nodes[(r+1) * (cols + 1) + cols],
 		   edgeCurve);
   }
@@ -47,7 +47,7 @@ function makePuzzle(puz, rows, cols, updateCount) {
     puz.createEdge(nodes[c],
 		   nodes[c+1],
 		   edgeCurve);
-    puz.createEdge(nodes[c + rows*(cols+1)], 
+    puz.createEdge(nodes[c + rows*(cols+1)],
 		   nodes[c + rows*(cols+1) + 1],
 		   edgeCurve);
   }
@@ -69,10 +69,10 @@ function makePuzzle(puz, rows, cols, updateCount) {
     }
 
     var d = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
-    
+
     var px = mx + p.x * d * 0.2;
     var py = my + p.y * d * 0.2;
-    
+
     var mxl = x1 + (x2 - x1) * 0.45;
     var myl = y1 + (y2 - y1) * 0.45;
 
@@ -92,10 +92,10 @@ function makePuzzle(puz, rows, cols, updateCount) {
     var pts = new Array();
     pts.push(new Pt(x1, y1));
 
-    pts.push(new Pt(mxl, myl));   
+    pts.push(new Pt(mxl, myl));
     pts.push(new Pt(mxl1, myl1));
     pts.push(new Pt(mxl2, myl2));
-    
+
     pts.push(new Pt(px, py));
 
     pts.push(new Pt(mxu2, myu2));
@@ -127,15 +127,15 @@ function makePuzzle(puz, rows, cols, updateCount) {
       var base = r*(cols+1)+c;
       var p = puz.createPiece([[base, base+1, base+cols+2, base+cols+1]]);
       (function(p, updateCount) {
-	 drag(p.container, 
-	      function(e,o,x,y){ 
+	 drag(p.container,
+	      function(e,o,x,y){
 		return true;
 	      },
 	      function(e,o,dx,dy){p.move(dx,dy);},
 	      function(e,o,x,y){
 		var jc = puz.tryJoin(p);
 		while (jc != null) {
-		  puz.join(p, jc); 
+		  puz.join(p, jc);
 		  jc = puz.tryJoin(p);
 		}
 		if (updateCount != undefined) {
@@ -156,6 +156,6 @@ function makePuzzle(puz, rows, cols, updateCount) {
 function scramblePuzzle(puz) {
   var dims = puzzle.dimensions();
   for (var id in puz.pieces) {
-    puz.pieces[id].moveTo(Math.random()*dims.x, Math.random()*dims.y);
+    puz.pieces[id].moveTo((Math.random()*0.75+0.125)*dims.x, (Math.random()*0.75+0.125)*dims.y);
   }
 }

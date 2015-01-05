@@ -1,6 +1,6 @@
 function resizeImage(img) {
-    var sx = (800 - 100) / img.width;
-    var sy = (800 - 100) / img.height;
+    var sx = (500 - 100) / img.width;
+    var sy = (500 - 100) / img.height;
 
     var k = Math.max(sx, sy);
 
