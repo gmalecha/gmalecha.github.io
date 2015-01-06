@@ -44,17 +44,19 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li{% if page.category == 'publication' or page.url == '/publications.html' %} class="active"{% endif %}><a href="/publications.html">Publications</a></li>
+            <li{% if page.category == 'publication' or page.url == '/publications/' %} class="active"{% endif %}><a href="/publications/">Publications</a></li>
 	  </ul>
           <ul class="nav navbar-nav navbar-right">
 	    <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Coq<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
 		<li><a href="//github.com/coq-ext-lib/coq-ext-lib">ExtLib</a></li>
 		<li><a href="//github.com/gmalecha/mirror-core">MirrorCore</a></li>
 {% comment %}	<li><a href="#proof-forge">Proof Forge</a></li> {% endcomment %}
 		<li><a href="//github.com/gmalecha/template-coq">TemplateCoq</a></li>
 		<li><a href="//github.com/gmalecha/coq-plugin-utils">Plugin Utils</a></li>
+		<li><a href="//github.com/coq-ext-lib/coq-compile">Coq Compiler</a></li>
+		<li><a href="//plv.csail.mit.edu/bedrock/">Bedrock</a></li>
 		<li><a href="//github.com/ynot-harvard/ynot">Ynot</a></li>
               </ul>
             </li>

@@ -5,11 +5,13 @@ title: Publications
 <div class="row">
   <div class="col-md-12">
     <table class="table">
-      <tr><th>Title</th>
+      <tr><th>Year</th>
+	  <th>Title</th>
 	  <th>Tags</th></tr>
       {% for post in site.posts %}
       {% if post.categories contains "publication" %}
-      <tr><td><a href="{{ post.url }}">{{ post.title }}</a></td>
+      <tr><td>{{ post.date | date: "%Y" }}</td>
+	  <td><a href="{{ post.url }}">{{ post.title }}</a></td>
 	  <td class="text-right">
 	    {% for tg in post.tags %}
 	    <span class="label label-default">{{ tg }}</span>
