@@ -13,6 +13,10 @@ layout: page
   </p>
   {% endif %}
 
+  {% unless content.blank? %}
+  <pre>{{ content|escape }}</pre>
+  {% endunless %}
+
   {% for tg in page.tags %}
   <span class="label label-default">{{ tg }}</span>
   {% endfor %}
