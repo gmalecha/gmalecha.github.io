@@ -1,0 +1,13 @@
+---
+layout: publication
+categories: publication
+title: Using Dependent Types and Tactics to Enable Semantic Optimization of Language-Integrated Queries
+authors: Gregory Malecha, and Ryan Wisneskey
+tags:
+- coq
+abstract: |
+  Semantic optimization -- the use of data integrity constraints to optimize relational queries -- has been well studied but, owing to limitations in how SQL handles constraints, has not often been applied by mainstream RDBMSs. In a language-integrated query setting, however, the query provider is free to rewrite queries before they are executed on an RDBMS.  We show, using Coq as our ambient language, how to use dependent types to represent a well known class of constraints -- embedded, implicational dependencies -- and how Coq tactics can be used to implement a particular kind of semantic optimization: tableaux minimization, which minimizes the number of joins required by a query.
+links:
+ - download: /publications/files/malecha-dbpl15.pdf
+ - source: https://github.com/gmalecha/semantic-query
+---
