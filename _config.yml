@@ -7,6 +7,10 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://gmalecha.github.io" # the base hostname & protocol for your site
 
 # Build settings
-markdown: kramdown
+highlighter: pygments
+
+markdown: redcarpet
+markdown_ext: md
+
 gems:
   - jekyll-feed
