@@ -7,7 +7,7 @@ tags:
  - computational reflection
  - coq
  - tutorial
-syntax_highlight: true
+highlight: true
 ---
 
 Computational reflection is a technique for extending proof assistants with efficient, domain-specific automation. There are a lot of interesting ideas in computational reflection but in this blog post I'm just going to cover a simple example, proving evenness of large constants. This example is purposefully *extremely* simple, and computational reflection is certainly capable of doing a lot more, but the very key pieces are here.
