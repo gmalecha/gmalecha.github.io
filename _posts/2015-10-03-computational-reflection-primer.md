@@ -13,7 +13,7 @@ syntax_highlight: true
 Computational reflection is a technique for extending proof assistants with efficient, domain-specific automation. There are a lot of interesting ideas in computational reflection but in this blog post I'm just going to cover a simple example, proving evenness of large constants. This example is purposefully *extremely* simple, and computational reflection is certainly capable of doing a lot more, but the very key pieces are here.
 
 
-The source code for this post can be found [here](/assets/blog/computational-reflection-example/even_refl.v).
+The source code for this post can be found [here](/assets/blog/computational-reflection-example/even_refl.v) or as a [gist](https://gist.github.com/gmalecha/46542774bfcc722b7c26#file-even_refl-v).
 
 ### The Problem ###
 
