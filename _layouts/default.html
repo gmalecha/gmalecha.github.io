@@ -22,6 +22,9 @@
     {% for css_name in page.extra_css %}
     <link rel="stylesheet" href="{{ css_name }}">
     {% endfor %}
+    {% for js_name in page.extra_js_head %}
+    <script src="{{ js_name }}"></script>
+    {% endfor %}
     {% if page.highlight %}
     <link rel="stylesheet" href="/css/syntax.css">
     {% endif %}

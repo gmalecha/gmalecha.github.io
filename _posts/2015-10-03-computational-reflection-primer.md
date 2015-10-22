@@ -2,7 +2,7 @@
 layout: page
 category: blog
 author: gregory malecha
-title: A Tutorial for Simple Computational Reflection
+title: The Core of Computational Reflection
 tags:
  - computational reflection
  - coq
