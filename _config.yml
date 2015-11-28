@@ -10,6 +10,8 @@ url: "https://gmalecha.github.io" # the base hostname & protocol for your site
 highlighter: pygments
 
 markdown: redcarpet
+redcarpet:
+  extensions: [footnotes]
 markdown_ext: md
 
 gems:
