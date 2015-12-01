@@ -3,6 +3,9 @@ layout: post
 category: blog
 title: Embedding Logics in Coq
 author: gregory malecha
+tags:
+- coq
+- tutorial
 highlight: true
 ---
 
