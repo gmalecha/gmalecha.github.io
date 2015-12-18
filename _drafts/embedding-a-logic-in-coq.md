@@ -29,8 +29,8 @@ I will discuss a slightly [simplified version of the definitions](https://github
 ## Describing Logics with Charge! ##
 
 Charge! is a framework for defining different logical structures and reasoning with them.
-Charge! is built using Coq's typeclass mechanism which makes it easy to build new logics from old ones.
-The primary Charge! typeclass is the one for an intuitionistic logic.
+Charge! is built using Coq's type class mechanism which makes it easy to build new logics from old ones.
+The primary Charge! type class is the one for an intuitionistic logic.
 
 ```coq
 Class ILogicOps (L : Type) : Type :=
@@ -77,7 +77,7 @@ The ```ILogicOps``` type class mostly just provides a uniform way to access the 
 In addition, as we saw above, Charge! defines useful notation (with the correct precedence and associativity) for writing formulas in a fairly readable way.
 
 The benefit of the uniform interface is the ability to state and prove properties about it.
-In Charge!, the reasoning principles for ```ILogicOps``` are defined in the ```ILogic``` typeclass[^fn-separate-classes].
+In Charge!, the reasoning principles for ```ILogicOps``` are defined in the ```ILogic``` type class[^fn-separate-classes].
 
 ```coq
 Class ILogic {A : Type} {ILOps: ILogicOps A} : Type :=
@@ -349,7 +349,7 @@ Charge! is a extremely convenient for rapid prototyping of logics because it tak
 In addition, we get to build on top of all of Coq's existing features.
 For example, we get strong types when we write formulas and we get Coq's proof language to provide foundational guarantees.
 
-Charge!'s typeclasses also provide guidance in defining "sensible" logics.
+Charge!'s type classes also provide guidance in defining "sensible" logics.
 On more than one occasion I have sketched out a logic only to realize that one or two of the axioms is unprovable in the model.
 When this happens, it is a good indication that something is not what it seems and it is a good idea to revisit your definitions to see what does not work.
 
@@ -380,3 +380,5 @@ In the upcoming [Coq 8.5](https://coq.inria.fr/news/126.html) release, [opam](ht
 [^fn-separate-classes]: Jesper refers to this as the "Dutch-style" due to its use in the [Math Classes project](https://github.com/math-classes/math-classes). See, for example the [definition of functors](https://github.com/math-classes/math-classes/blob/master/interfaces/functors.v). There are pros and cons to this style, but I'll leave an extensive discussion of that for another post.
 
 [^fn-focus]: Readers familiar with CoFunctors will note that ```focusT``` is none other than ```cofmap```.
+LocalWords:  Gallina Coq intuitionistic lentails ltrue lfalse lor
+LocalWords:  limpl disjunction lforall lexists ILogicOps impl forall
