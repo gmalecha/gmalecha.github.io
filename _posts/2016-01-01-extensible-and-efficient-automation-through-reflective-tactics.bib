@@ -1,0 +1,23 @@
+---
+layout: publication
+category: publication
+title: |
+  Extensible and Efficient Automation through Reflective Tactics
+authors: Gregory Malecha and Jesper Bengston
+tags:
+- coq
+- rtac
+- computation reflection
+- automation
+abstract: |
+  Foundational proof assistants simultaneously offer both expressive logics and strong guarantees.
+  The price they pay for this flexibility is often the need to build and check explicit proof objects which can be expensive.
+  In this work we develop a collection of techniques for building reflective automation, where proofs are witnessed by verified decision procedures rather than verbose proof objects.
+  Our techniques center around a verified domain specific language for proving, Rtac, written in Gallina, Coq's logic.
+  The design of tactics makes it easy to combine them into higher-level automation that can be proved sound in a mostly automated way.
+  Furthermore, unlike traditional uses of reflection, Rtac tactics are independent of the underlying problem domain, which allows them to be re-tasked to automate new problems with very little effort.
+  We demonstrate the usability of Rtac through several case studies demonstrating orders of magnitude speedups for relatively little engineering work.
+links:
+ - paper: /publications/files/rtac-esop16.pdf
+ - conference link: http://www.etaps.org/index.php/2016/esop
+---
