@@ -6,7 +6,10 @@ title: Approximating Inductive Types in Coq
 highlight: true
 ---
 
-Coq inductive data types are required to be strictly positive. In this article, I'll discuss a bit about what this means, and I'll show a simple technique to approximate an inductive data type. While not the paragon of computational efficiency, the technique that I describe here makes it possible to build inductive data types compositionally (though it only supports data-types with finite branching).
+Coq inductive data types are required to be strictly positive.
+In this article, I'll discuss a bit about what this means, and I'll show a simple technique to approximate an inductive data type.
+While not the paragon of computational efficiency, the technique that I describe here makes it possible to build inductive data types compositionally (though it only supports data-types with finite branching).
+In addition, it may serve as a less mathematical introduction to some of the concepts in fixpoints.
 
 The full source code is available as a [gist](https://gist.github.com/gmalecha/6dd68639da8c18f02753#file-approxnat-v).
 
