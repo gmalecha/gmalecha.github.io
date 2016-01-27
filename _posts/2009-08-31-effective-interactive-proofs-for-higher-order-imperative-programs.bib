@@ -3,6 +3,7 @@ layout: publication
 category: publication
 title: Effective interactive proofs for higher-order imperative programs
 authors: Adam Chlipala, Gregory Malecha, Greg Morrisett, Avraham Shinnar, Ryan Wisnesky
+where: ICFP'09
 abstract: |
   We present a new approach for constructing and verifying higher-order, imperative programs using the Coq proof assistant. We build on the past work on the Ynot system, which is based on Hoare Type Theory. That original system was a proof of concept, where every program verification was accomplished via laborious manual proofs, with much code devoted to uninteresting low-level details. In this paper, we present a re-implementation of Ynot which makes it possible to implement fully-verified, higher-order imperative programs with reasonable proof burden. At the same time, our new system is implemented entirely in Coq source files, showcasing the versatility of that proof assistant as a platform for research on language design and verification. Both versions of the system have been evaluated with case studies in the verification of imperative data structures, such as hash tables with higher-order iterators. The verification burden in our new system is reduced by at least an order of magnitude compared to the old system, by replacing manual proof with automation. The core of the automation is a simplification procedure for implications in higher-order separation logic, with hooks that allow programmers to add domain-specific simplification rules.
 

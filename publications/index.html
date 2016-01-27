@@ -1,17 +1,17 @@
 ---
 layout: page
-title: Publications
+title: Publications & Talks
 category: publication
 ---
 <div class="row">
   <div class="col-md-12">
     <table class="table">
-      <tr><th>Year</th>
+      <tr><th>At</th>
 	  <th>Title</th>
 	  <th>Tags</th></tr>
       {% for post in site.posts %}
-      {% if post.categories contains "publication" %}
-      <tr><td>{{ post.date | date: "%Y" }}</td>
+      {% if post.categories contains "publication" or post.categories contains "talk" %}
+      <tr><td>{% if post.where %}{{ post.where }}{% else %}{{ post.date | date: "%Y" }}{% endif %}</td>
 	  <td><a href="{{ post.url }}">{{ post.title }}</a></td>
 	  <td class="text-right">
 	    {% for tg in post.tags %}
