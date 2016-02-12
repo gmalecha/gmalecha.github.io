@@ -9,10 +9,11 @@ url: "https://gmalecha.github.io" # the base hostname & protocol for your site
 # Build settings
 highlighter: pygments
 
-markdown: redcarpet
-redcarpet:
-  extensions: [footnotes]
+markdown: kramdown
 markdown_ext: md
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 gems:
   - jekyll-feed
