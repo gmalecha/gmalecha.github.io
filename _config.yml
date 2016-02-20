@@ -44,9 +44,9 @@ social:
 
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 markdown_ext: md, markdown
-redcarpet:
+kramdown:
   extensions: ["footnotes", "no_intra_emphasis", "fenced_code_blocks"]
   highlighter: pygmentize
 permalink: pretty
