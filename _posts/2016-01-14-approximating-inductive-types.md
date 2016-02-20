@@ -1,6 +1,6 @@
 ---
-layout: page
-category: blog
+layout: post
+category: reflections
 author: gregory malecha
 title: Approximating Inductive Types in Coq
 highlight: true

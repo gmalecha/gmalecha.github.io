@@ -1,53 +1,75 @@
 ---
 layout: default
 ---
-<div class="jumbotron">
-  <div class="container">
-    <div class="row">
-    <div class="col-xs-offset-0 col-xs-12 col-sm-6 col-sm-offset-2">
-      <img class="img-rounded"
-	   src="{{ site.url }}/assets/gregory-malecha.jpg"
-	   width="150pt" style="float:left; clear: left; margin-right: 10pt;"/>
-      <h2>gregory malecha</h2>
-      gmalecha at gmail.com<br />
-      <!-- Place this tag where you want the button to render. -->
-      <a class="github-button" href="https://github.com/gmalecha" aria-label="Follow @gmalecha on GitHub">Follow</a>
-      <a href="https://twitter.com/gregory_malecha" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @gregory_malecha</a>
-    </div>
-    <div class="col-xs-4 col-sm-2 col-md-pull-0 text-center">
-{% comment %}
-      <img src="https://festival.sdaff.org/2012/files/2012/09/UCSD.gif"
-	   height="80pt" />
-      <br/><br/>
-<!--
-      <img src="http://www.seas.harvard.edu/sites/default/files/images/About%20SEAS/image_large.png"
-	   height="80pt" />
--->
-{% endcomment %}
-    </div>
-    </div>
-  </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 col-lg-offset-1">
-      <h2 class="text-center">ExtLib</h2>
-      <p class="text-center">ExtLib reinvisions the Coq standard library to be a little more Haskell like. It focuses on first-class abstractions, organized (rather than organic) library layout, and mostly non-dependent types.</p>
-      <p class="text-center"><a class="btn btn-default" href="//github.com/coq-ext-lib/coq-ext-lib#" role="button">View details &raquo;</a></p>
+    <header>
+      <div class="container">
+	<div class="row">
+        <div class="col-xs-4 col-md-3 col-md-offset-1 col-lg-offset-1 col-lg-2 vcenter">
+          <img class="img-responsive img-rounded"
+	       style="max-height: 100pt; text-align: center;" src="img/gregory-malecha.jpg" alt="">
+        </div><!--
+     --><div class="col-xs-8 col-md-6 col-lg-6 text-left vcenter">
+	  <h1>Gregory Malecha</h1>
+	  <div class="light-primary" style="font-size: 18pt">gmalecha at gmail dot com</div>
+	  <div class="light-primary" style="font-size: 18pt">
+	    <a class="github-button" href="https://github.com/gmalecha" aria-label="Follow @gmalecha on GitHub">Follow</a>
+	    <a href="https://twitter.com/gregory_malecha" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @gregory_malecha</a>
+	  </div>
+	</div>
+	</div>
+      </div>
+    </header>
+
+    <section id="blog" class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+          <h2><a href="/reflections/">Reflections <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h2>
+	  <ul>
+	  {% assign posts = site.categories['reflections'] | sort: 'date' | reverse %}
+	  {% for post in posts %}
+	  <li><a href="{{ post.url }}">{{ post.title }}</a> on {{ post.date | date: "%b %-d, %Y" }}</li>
+	  {% endfor %}
+	  </ul>
+      </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-      <h2 class="text-center">MirrorCore</h2>
-      <p class="text-center">MirrorCore is my thesis work on making computational reflection compositional. It features a higher-order extensible reflective language as well as a fully-reflective tactic language similar to Ltac.</p>
-      <p class="text-center"><a class="btn btn-default" href="//github.com/gmalecha/mirror-core" role="button">View details &raquo;</a></p>
+    </section>
+
+    <section id="projects" class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+        <h2>Projects</h2>
+	<div class="row">
+	  {% for proj in site.projects %}
+	  <div class="col-xs-6 col-md-4">
+	    {% if proj.img %}
+	    <img style="float: left; margin: 5pt; height: 80pt;" class="img-rounded" src="{{ proj.img }}" />
+	    {% endif %}
+	    <h3>{{ proj.title }} <a href="{{ proj.url }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h3>
+	    {{ proj.descr }}
+	  </div>
+	  {% endfor %}
+	</div>
+      </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-      <h2 class="text-center">VeriDrone</h2>
-      <p class="text-center">In VeriDrone, we develop monitors for cyber-physical systems that guarantee that they adhere to certain safety policies.</p>
-      <p class="text-center"><a class="btn btn-default" href="http://veridrone.ucsd.edu/" role="button">View details &raquo;</a></p>
+    </section>
+
+    <section id="publications" class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+          <h2><a href="/publications/">Publications <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h2>
+	  <ul>
+	  {% assign publications = site.categories['publication'] | sort: 'date' | reverse %}
+	  {% for post in publications limit:5 %}
+	  <li><a href="{{ post.url }}">{{ post.title }}</a> on {{ post.date | date: "%b %-d, %Y" }}</li>
+	  {% endfor %}
+	  {% if publications | size > 3 %}
+	  <li><a href="{{ base_url }}/publications/">...more...</a></li>
+	  {% endif %}
+	  </ul>
+      </div>
     </div>
-  </div>
-</div>
+    </section>
 
 <script async defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>

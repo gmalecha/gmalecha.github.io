@@ -1,7 +1,8 @@
 ---
 layout: page
 ---
-<article class="post-header">
+<section class="row">
+  <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
   <h3 class="authors">{{ page.authors }}</h3>
   <p>{{ page.abstract }}</p>
   {% if page.links %}
@@ -13,11 +14,16 @@ layout: page
   </p>
   {% endif %}
 
-  {% unless content.blank? %}
-  <pre>{{ content|escape }}</pre>
-  {% endunless %}
-
   {% for tg in page.tags %}
   <span class="label label-default">{{ tg }}</span>
   {% endfor %}
-</article>
+    </div>
+</section>
+
+{% unless content.blank? %}
+<section class="row">
+  <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+  <pre>{{ content|escape }}</pre>
+  </div>
+</section>
+{% endunless %}

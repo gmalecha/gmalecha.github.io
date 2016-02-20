@@ -1,0 +1,24 @@
+---
+layout: page-wide
+category: blog
+extra_css:
+ - /css/blog-index.css
+---
+{% for post in site.posts %}
+{% if post.categories contains "reflections" %}
+<section class="row">
+    <div class="{{ site.layout.margin-class-wide }}">
+      <h2 style="margin-bottom: 1pt"><a href="{{ post.url }}">{{ post.title }} <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h2>
+      <div class="secondary-text" style="margin-bottom: 5pt">{{ post.author }} @ {{ post.date | date:"%Y-%m-%d" }}</div>
+      <blockquote class="secondary-text" style="font-size: smaller;">{{ post.excerpt | remove: "<p>" | remove: "</p>" }}</blockquote>
+      {% unless post.tags.empty? %}
+      <p style="margin-top: -20pt;" class="text-right">
+	{% for tg in post.tags %}
+        <span class="tag label label-default">{{ tg }}</span>
+        {% endfor %}
+      </p>
+      {% endunless %}
+    </div>
+</section>
+{% endif %}
+{% endfor %}

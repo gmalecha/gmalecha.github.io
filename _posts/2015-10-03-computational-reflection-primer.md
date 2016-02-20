@@ -1,6 +1,6 @@
 ---
-layout: page
-category: blog
+layout: post
+category: reflections
 author: gregory malecha
 title: The Core of Computational Reflection
 tags:

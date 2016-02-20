@@ -1,0 +1,112 @@
+{% if page.url == '/' %}
+{% assign top = '#page-top' %}
+{% assign project = '#projects' %}
+{% else %}
+{% assign top = '/' %}
+{% assign blog = '/reflections/' %}
+{% assign project = '/#projects' %}
+{% assign publications = '/publications/' %}
+{% endif %}
+{% assign blog = '/reflections/' %}
+{% assign publications = '/publications/' %}
+
+   <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+
+        <!-- Title -->
+        <div class="navbar-header pull-left">
+          <div class="navbar-brand">
+	    {% if page.url != '/index.html' and page.url != '/' and page.url != '' %}
+	    <img class="img-rounded logo" class="img-rounded" src="/img/gregory-malecha.jpg" />
+	    {% endif %}
+            <a href="{{ site.url }}">{{ site.title }}</a>
+	  </div>
+        </div>
+
+        <!-- 'Sticky' (non-collapsing) right-side menu item(s) -->
+        <div class="navbar-header pull-right">
+          <ul class="nav pull-right">
+	    <li class="nav-rss"><a href="{{ site.base_url }}/feed.xml">
+		<i class="fa fa-rss"></i>
+	    </a></li>
+            <!-- Add any additional bootstrap header items.  This is a drop-down from an icon -->
+          </ul>
+
+          <!-- Required bootstrap placeholder for the collapsed menu -->
+          <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+
+        <!-- The Collapsing items            navbar-left or navbar-right -->
+        <div class="collapse navbar-collapse navbar-right">
+          <!--                      pull-right keeps the drop-down in line -->
+          <ul class="nav navbar-nav pull-right">
+            <li class="hidden"><a href="#page-top"></a></li>
+	    <li class="page-scroll{% if page.category contains 'blog' %} current{% endif %}">
+	      <a href="{{ blog }}">Reflections</a>
+	    </li>
+            <li class="page-scroll">
+	      <a href="{{ project }}">Projects</a>
+            </li>
+	    <li class="page-scroll{% if page.category contains 'publication' %} current{% endif %}">
+	      <a href="{{ publications }}">Publications</a>
+	    </li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+{% comment %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button><!--
+	     --><div class="navbar-brand">
+		  {% if page.url != '/index.html' and page.url != '/' and page.url != '' %}
+		  <img class="img-rounded logo" class="img-rounded" src="/img/gregory-malecha.jpg" />
+		  {% endif %}
+                  <a href="{{ top }}">{{ site.title }}</a>
+		</div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse"
+		 id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+		      {% if page.url == '/' %}
+                        <a href="#page-top"></a>
+		      {% endif %}
+                    </li>
+		    <li class="page-scroll{% if page.category contains 'blog' %} current{% endif %}">
+		      <a href="{{ blog }}">Reflections</a>
+		    </li>
+                    <li class="page-scroll">
+		      <a href="{{ project }}">Projects</a>
+                    </li>
+		    <li class="page-scroll{% if page.category contains 'publication' %} current{% endif %}">
+		      <a href="{{ publications }}">Publications</a>
+		    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+	    <div class="navbar-header navbar-right">
+	      <ul class="nav pull-right nav-rss">
+
+	      </ul>
+	    </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+{% endcomment %}
+    <div class="nav-spacer"></div>
+{% comment %}
+    <div class="dev-trial"></div>
+{% endcomment %}

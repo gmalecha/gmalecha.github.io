@@ -1,19 +1,66 @@
 # Site settings
-title: gregory malecha
+title: Gregory Malecha
 email: gmalecha@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
+url: https://gmalecha.github.io
+description:
   I do research on programming languages, program verification, compilers, and program analysis.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://gmalecha.github.io" # the base hostname & protocol for your site
+skills: "Programming Languages - Program Verification - Static Analysis - Compilers"
+meta_author: Gregory Malecha
+
+# Google webmaster tools
+google_verify:
+
+# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+bing_verify:
+
+# If you use disqus you need disqus shortname
+# https://help.disqus.com/customer/portal/articles/466208
+disqus_shortname: gregorymalecha
+
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  accent: 6C7EE4
+  dark-primary: 455A64
+  primary: 607D8B
+  light-primary: CFD8DC
+  text: FFFFFF
+  primary-text: 212121
+  secondary-text: 727272
+  divider-color: B6B6B6
+layout:
+  margin-class: col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8
+  margin-class-wide: col-md-offset-1 col-md-10
+
+# Footer settings
+footer:
+  copyright: Gregory Malecha
+
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: github
+    url: http://github.com/gmalecha
+  - title: twitter
+    url: http://twitter.com/gregory_malecha
+
 
 # Build settings
-highlighter: pygments
+markdown: redcarpet
+markdown_ext: md, markdown
+redcarpet:
+  extensions: ["footnotes", "no_intra_emphasis", "fenced_code_blocks"]
+  highlighter: pygmentize
+permalink: pretty
 
-markdown: kramdown
-markdown_ext: md
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-
-gems:
-  - jekyll-feed
+projects:
+  - title: Mirror-Core
+    descr: >
+      MirrorCore is a framework for easing the burden of building compositional reflective procedures in the Coq proof assistant.
+    url: https://github.com/gmalecha/mirror-core
+  - title: Ext-Lib
+    descr: >
+      ExtLib is an extension to Coq's standard library which embraces new features such as universe polymorphism, primitive projections, and type classes.
+    url: https://github.com/coq-ext-lib/coq-ext-lib
+  - title: Template-Coq
+    descr: >
+      Template-Coq is a bare-bones quoting library for Coq. Its syntax is designed to be as close as possible to Coq's internal representation.
+    url: https://github.com/gmalecha/template-coq

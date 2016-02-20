@@ -1,6 +1,6 @@
 ---
 layout: post
-category: blog
+category: reflections
 title: Embedding Logics in Coq
 author: gregory malecha
 tags:

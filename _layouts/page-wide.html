@@ -2,13 +2,11 @@
 layout: default
 ---
 <article class="container">
-{% unless page.title.blank %}
   <div class="row">
-  <div class="{{ site.layout.margin-class }}">
+  <div class="{{ site.layout.margin-class-wide }}">
     <h2>{{ page.title }}</h2>
   </div>
   </div>
-{% endunless %}
 
   {{ content }}
 </article>

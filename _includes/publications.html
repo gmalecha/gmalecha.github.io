@@ -1,0 +1,16 @@
+<section id="publications">
+  <div class="container">
+    <div class="row">
+      <h2>Publications</h2>
+    </div>
+  </div>
+  <div class="row">
+    <ul>
+      {% assign highlighted_publications = site.posts | sort: 'date' %}
+      {% for post in highlighted_publications limit:5 %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+
+      {% endfor %}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+.dev-trial {
+    z-index: 2000;
+    position: fixed;
+    top: 2pt;
+    right: 0pt;
+    background-color: yellow;
+    color: black;
+    height: 20pt;
+    width: 80px;
+}
+
+@media(min-width:1200px) {
+    .dev-trial:after { content: 'lg'; }
+}
+
+@media(min-width:992px) and (max-width: 1199px) {
+    .dev-trial:after { content: 'md'; }
+}
+
+@media(min-width:768px) and (max-width:991px) {
+    .dev-trial:after { content: 'sm'; }
+}
+
+@media(min-width:0px) and (max-width:767px) {
+    .dev-trial:after { content: 'xs'; }
+}

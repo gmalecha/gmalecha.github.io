@@ -1,0 +1,194 @@
+body {
+    overflow-x: hidden;
+    font-size: 14pt;
+    margin-top: 50pt;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-variant: small-caps;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #{{ site.color.dark-primary }};
+}
+
+h1 { font-size: 28pt; }
+h2 { font-size: 22pt; }
+h3 { font-size: 18pt; }
+h4 { font-size: 16pt; }
+
+h1 a { color: #{{ site.color.dark-primary }}; }
+h2 a { color: #{{ site.color.dark-primary }}; }
+h3 a { color: #{{ site.color.dark-primary }}; }
+h4 a { color: #{{ site.color.dark-primary }}; }
+h5 a { color: #{{ site.color.dark-primary }}; }
+h6 a { color: #{{ site.color.dark-primary }}; }
+
+
+p {
+    font-size: 14pt;
+}
+
+p.small {
+    font-size: 11pt;
+}
+
+.secondary-text {
+    color: #{{ site.color.secondary-text }};
+}
+.light-primary {
+    color: #{{ site.color.light-primary }};
+}
+
+.glyphicon {
+    color: #{{ site.color.accent }};
+}
+
+
+/* Navigation */
+nav {
+    position: fixed;
+    background-color: #{{ site.color.dark-primary }};
+    height: 50pt;
+    font-variant: small-caps;
+}
+
+nav .navbar-brand a {
+    color: #{{ site.color.text }};
+    font-weight: 600;
+    font-size: 20pt;
+}
+nav .navbar-brand a:hover {
+    text-decoration: none;
+    color: #{{ site.color.accent }};
+}
+
+nav .navbar-brand img {
+    display: inline-block;
+    height: 30pt;
+    vertical-align: middle;
+    margin-top: -2pt;
+}
+
+nav li.current {
+    background-color: #{{ site.color.primary }};
+}
+
+.nav li.current a:hover {
+    color: black;
+}
+
+ul.navbar-nav>li>a:hover {
+    color: #{{ site.color.accent }};
+}
+
+.nav-rss {
+    height: 40pt;
+    vertical-align: middle;
+    line-height: 28pt;
+    font-size: 20pt;
+}
+li.nav-rss a {
+    color: white;
+}
+li.nav-rss a:hover {
+    color: #{{ site.color.accent }};
+    background-color: #{{ site.color.dark-primary }};
+}
+
+/* Index Page Only */
+header {
+    height: 150pt;
+    text-align: center;
+    color: #fff;
+    background: #{{ site.color.primary }};
+}
+
+header h1 {
+    margin: 0;
+    color: #{{ site.color.text }};
+}
+
+header .container {
+    padding-top: 20pt;
+    padding-bottom: 20pt;
+}
+
+header img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+header .intro-text .name {
+    display: block;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+header .intro-text .skills {
+    font-size: 1.25em;
+    font-weight: 300;
+}
+
+/** Footer Stuff **/
+.scroll-top {
+    z-index: 1049;
+    position: fixed;
+    right: 2%;
+    bottom: 2%;
+    width: 50px;
+    height: 50px;
+}
+
+.scroll-top .btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.scroll-top .btn:focus {
+    outline: 0;
+}
+
+.btn-primary {
+    background-color: #{{ site.color.accent }};
+    color: #{{ site.color.text }};
+}
+.btn-social {
+    color: #{{ site.color.text }};
+}
+.btn-social:hover {
+    color: #{{ site.color.accent }};
+}
+
+footer {
+    background-color: #{{ site.color.dark-primary }};
+    color: #{{ site.color.text; }}
+}
+
+footer .footer-below {
+    font-size: 10pt;
+    background-color: #{{ site.color.dark-primary }};
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+section {
+    margin-top: 5pt;
+    margin-bottom: 10pt;
+}
+
+.tag {
+    font-size: 8pt;
+}
