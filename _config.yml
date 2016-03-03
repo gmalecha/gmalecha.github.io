@@ -64,3 +64,8 @@ projects:
     descr: >
       Template-Coq is a bare-bones quoting library for Coq. Its syntax is designed to be as close as possible to Coq's internal representation.
     url: https://github.com/gmalecha/template-coq
+  - title: VeriDrone
+    descr: >
+      VeriDrone is exploring foundational verification of cyber-physical
+      systems such as quadcopters. Check us out!
+    url: http://veridrone.ucsd.edu/

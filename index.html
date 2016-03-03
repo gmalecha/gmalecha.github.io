@@ -45,9 +45,11 @@ layout: default
 	    {% if proj.img %}
 	    <img style="float: left; margin: 5pt; height: 80pt;" class="img-rounded" src="{{ proj.img }}" />
 	    {% endif %}
-	    <h3>{{ proj.title }} <a href="{{ proj.url }}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h3>
+	    <h3><a href="{{ proj.url }}">{{ proj.title }} <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h3>
 	    {{ proj.descr }}
 	  </div>
+	  {% cycle 'xs' : '' , '<div class="clearfix visible-xs-block visible-sm-block"></div>' %}
+	  {% cycle 'md' : '', '' , '<div class="clearfix visible-lg-block visible-md-block"></div>' %}
 	  {% endfor %}
 	</div>
       </div>
