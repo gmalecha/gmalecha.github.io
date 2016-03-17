@@ -35,7 +35,7 @@ To try out the plugin, you can start up coqtop and run the following:
 
 ~~~coq
 Require Import Coq.Reals.Reals.
-Require Import SMT.Tactic. (** Load the SMT tactic **)
+Require Import SMTC.Tactic. (** Load the SMT tactic **)
 
 Set SMT Solver "z3". (** Use Z3, also "CVC4" **)
 
