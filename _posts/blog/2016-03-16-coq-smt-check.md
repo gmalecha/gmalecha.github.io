@@ -132,7 +132,7 @@ Goal forall x : R, x > 0.
 While it is not currently on my radar, extending the translation to reflect more problems would be great.
 One could imagine that in some cases, a plugin like this could provide similar functionality to [quick-chick](https://github.com/QuickChick) which does property based testing.
 
-[Jasmine Blanchett](http://people.mpi-inf.mpg.de/~jblanche/) one of the developers of [Isabelle's Sludgehammer tactic](http://people.mpi-inf.mpg.de/~jblanche/#sledgehammer) has started a project on porting some of those ideas into Coq in a principled way.
+[Jasmin Blanchette](http://people.mpi-inf.mpg.de/~jblanche/) one of the developers of [Isabelle's Sludgehammer tactic](http://people.mpi-inf.mpg.de/~jblanche/#sledgehammer) has started a project on porting some of those ideas into Coq in a principled way.
 When he is successful his automation will be able to import proof objects back into Coq providing foundational guarantees rather than relying on the ```by_smt``` axiom that we used above.
 
 [^fn-cvc4]: For CVC4, the executable should be renamed 'cvc4'.
