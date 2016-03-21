@@ -20,7 +20,7 @@ In this post I'm going to discuss a plugin that I wrote to call SMT solvers from
 ## The High Level ##
 
 Let's just take a look at the high level code.
-You can install the latest version of the plugin using [opam]() and Coq 8.5 with the following command line:
+You can install the latest version of the plugin using [opam](http://coq.io/opam) and Coq 8.5 with the following command line:
 
 ~~~bash
 # opam install coq-smt-check

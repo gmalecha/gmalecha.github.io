@@ -327,15 +327,15 @@ refine (
           end
         end _res2
       end
-    | _ =>
+    | [? x ] x =>
       mtry
-        res <- remove_refine l r ;
+        res <- remove_refine x r ;
         match res with
         | exist _ res1 res2 =>
           ret (@exist _ _ (one, res1) _)
         end
       with _ =>
-        ret (@exist _ _ (l, r) _)
+        ret (@exist _ _ (x, r) _)
       end
     end).
 (** Proofs elided **)
@@ -368,23 +368,45 @@ Ltac solve_it :=
 
 The crucial part of the implementation is the two pattern matches called out in the code with the ```NOTE```s. Without these pattern matches the code takes 27seconds to prove the size 5 benchmark, with the pattern matches that time goes down to 0.076 seconds (a 355x speedup).
 
+While the proof building for this is still pretty fast, manual inspection of the proof term shows that it is still far from optimal. Here is the proof term for cancelling a problem of size 2 (with .
+
+~~~coq
+(finish_cancel (asM 1 * asM 0) (asM 0 * asM 1) (one * one) (one * one)
+   (cancel_refine_subproof (asM 1 * asM 0) (asM 0 * asM 1) (asM 1) (asM 0) eq_refl one 
+      (asM 0 * one)
+      (cancel_refine_subproof0 (asM 1) (asM 0 * asM 1) (asM 1) eq_refl (asM 0 * one)
+         (remove_refine_subproof1 (asM 1) (asM 0 * asM 1) (asM 0) (asM 1) eq_refl NotFound NotFound eq_refl one
+            (remove_refine_subproof (asM 1) (asM 1) eq_refl))) one (one * one)
+      (cancel_refine_subproof0 (asM 0) (asM 0 * one) (asM 0) eq_refl (one * one)
+         (remove_refine_subproof0 (asM 0) (asM 0 * one) (asM 0) one eq_refl one
+            (remove_refine_subproof (asM 0) (asM 0) eq_refl)))) eq_refl)
+~~~
+
+There are two issues here:
+
+  1. There are several occurances of ```eq_refl``` which is the proof constructor for equality proofs. This is due to the way that Mtac implements ```mmatch```. To convey the equivalence, ```mmatch``` gives its body access to the information that the discriminee unifies with the pattern through an explicit proof term (which is always instantiated with ```eq_refl``` during execution.
+
+
+
 ### Performance ###
 
-The final implementation of cancellation performs pretty well but it does take a lot of care to get there. In particular, it is really important that you inspect the resulting proof terms to ensure that you are not duplicating too much information. The chart shows how the optimized Mtac automation compares to the standard Ltac implementation of cancellation on various problem sizes [^fn-chart].
+The final implementation of cancellation performs pretty well but it does take a lot of care to get there. In particular, it is really important that you inspect the resulting proof terms to ensure that you are not duplicating too much information.
+
+The chart shows how the optimized Mtac automation compares to the standard Ltac implementation of cancellation on various problem sizes [^fn-chart].
 
 <div id="mtac-perf"></div>
 
 <script type="text/javascript">
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Size', 'Ltac' , 'Ltac-Qed',  'Mtac', 'Mtac-Qed', 'Rtac', 'Rtac-Qed'],
+        ['Size', 'Ltac' , 'Ltac-Qed', 'Mtac' , 'Mtac-Qed', 'Rtac', 'Rtac-Qed'],
         [3,      0.007  , 0.001     , 0.038  , 0.006     , 0.020 , 0.092 ],
         [5,      0.017  , 0.002     , 0.108  , 0.019     , 0.027 , 0.124 ],
         [10,     0.125  , 0.011     , 0.302  , 0.101     , 0.050 , 0.201 ],
         [20,     1.416  , 0.062     , 1.541  , 0.393     , 0.099 , 0.339 ],
-        [50,     43.206 , 0.666     , 35.665 , 9.851     , 0.341 , 0.925 ],
-        [75,     229.533, 2.338     , 168.192, 45.569    , 0.530 , 1.255 ],
-        [100,    737.690, 5.334     , 519.238, 133.901   , 0.885 , 1.830 ],
+        [50,     43.206 , 0.666     , 32.917 , 5.218     , 0.341 , 0.925 ],
+        [75,     229.533, 2.338     , 153.424, 45.569    , 0.530 , 1.255 ],
+        [100,    737.690, 5.334     , 454.763, 70.458    , 0.885 , 1.830 ],
       ]);
 
       var options = {
@@ -402,6 +424,11 @@ The final implementation of cancellation performs pretty well but it does take a
     }
     google.setOnLoadCallback(drawChart);
 </script>
+
+Mtac solidly beats Ltac on most problem sizes for the search but is substantially slower on checking the final proof term. This suggests that the proof that we are building with Mtac is still far from optimal. At the high level, this can be attributed to a wildly different proof search technique, but there are also low-level optimizations that are still possible. Consider for example the following proof for the problem instance of size 2.
+
+
+
 
 Even after all of the optimization, Mtac doesn't come close to the speed of
 [computational reflection]({% post_url 2016-02-20-rtac-technical-overview %}), e.g. the [Rtac](https://github.com/gmalecha/mirror-core) implementation of cancellation solves problems of size 100 in under a second while Mtac takes 5 seconds on a problem of size 30. While it isn't very common to have such large problems, it is not uncommon when stitching automation together. For example, program verification might result in tens of calls to an entailment checker each with a goal of perhaps 10 or so conjuncts. Stitching all of these proofs together along with the reasoning about the program can quickly become costly.
