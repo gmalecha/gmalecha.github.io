@@ -20,7 +20,8 @@ layout: page
     </div>
 </section>
 
-{% unless content.blank? %}
+{% assign scontent = content|strip %}
+{% unless scontent == "" %}
 <section class="row">
   <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
   <pre>{{ content|escape }}</pre>
