@@ -8,7 +8,7 @@ title: Experimenting with Mtac
 author: gregory malecha
 highlight: true
 extra_js_head:
-- "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"
+ - "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"
 ---
 
 I spent some time a few months ago experimenting with [Mtac](http://plv.mpi-sws.org/mtac/) and figured that I'd write a little bit about my experience.
