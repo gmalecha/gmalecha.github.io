@@ -81,7 +81,7 @@ Which is easy to solve using ```one_star```.
 clear; abstract (symmetry; apply emp_star).
 ~~~
 
-Here ```abstract``` treats the result of the tactic as opaque. ```abstract X``` constructs a new definition with the given type and solves it using ```X``` (note that ```X``` must completely solve the goal). Then it solves the goal by appealing directly to the proof. The other two proofs can be solved in a similar way.
+Here ```abstract``` treats the result of the tactic as opaque[^fn-abstract]. ```abstract X``` constructs a new definition with the given type and solves it using ```X``` (note that ```X``` must completely solve the goal). Then it solves the goal by appealing directly to the proof. The other two proofs can be solved in a similar way.
 
 The ```Mrun``` "function" runs the Mtac program [^fn-mrun].
 
@@ -236,7 +236,7 @@ There are two main things that we can do to make better proof terms.
      values of type ```M```.
   2. Avoid using ```Program``` to get finer granularity control over the obligations and term that is constructed.
 
-Of the two, the first is the more important. Adopting these two techniques yields the following definition:
+Of the two, the first is the more important; the second simply makes it easier to do this. Adopting these two techniques yields the following definition:
 
 ~~~coq
 Definition remove_refine (x : m)
@@ -372,7 +372,7 @@ While the proof building for this is still pretty fast, manual inspection of the
 
 ~~~coq
 (finish_cancel (asM 1 * asM 0) (asM 0 * asM 1) (one * one) (one * one)
-   (cancel_refine_subproof (asM 1 * asM 0) (asM 0 * asM 1) (asM 1) (asM 0) eq_refl one 
+   (cancel_refine_subproof (asM 1 * asM 0) (asM 0 * asM 1) (asM 1) (asM 0) eq_refl one
       (asM 0 * one)
       (cancel_refine_subproof0 (asM 1) (asM 0 * asM 1) (asM 1) eq_refl (asM 0 * one)
          (remove_refine_subproof1 (asM 1) (asM 0 * asM 1) (asM 0) (asM 1) eq_refl NotFound NotFound eq_refl one
@@ -427,21 +427,23 @@ The chart shows how the optimized Mtac automation compares to the standard Ltac 
 
 Mtac solidly beats Ltac on most problem sizes for the search but is substantially slower on checking the final proof term. This suggests that the proof that we are building with Mtac is still far from optimal. At the high level, this can be attributed to a wildly different proof search technique, but there are also low-level optimizations that are still possible. Consider for example the following proof for the problem instance of size 2.
 
-Even after all of the optimization, Mtac isn't as fast as 
+Even after all of the optimization, Mtac isn't as fast as
 [computational reflection]({% post_url 2016-02-20-rtac-technical-overview %}), e.g. the [Rtac](https://github.com/gmalecha/mirror-core) implementation of cancellation solves problems of size 100 in under a second while Mtac takes 5 seconds on a problem of size 30. While it isn't very common to have such large problems, it is not uncommon when stitching automation together. For example, program verification might result in tens of calls to an entailment checker each with a goal of perhaps 10 or so conjuncts. Stitching all of these proofs together along with the reasoning about the program can quickly become costly.
 
 ## Final Thoughts ##
 
 Mtac is quite convenient and light-weight to use; however, getting good performance can be a bit tricky. The main thing that you need to understand to write reasonably efficient Mtac tactics is the evaluation mechanism. The various iterations took some time but the optimizations are well worth it (over a 1000x speedup).
 
-While you could chalk this up to implementation, to me there seems to be something more here. Constructing the proof term within the function is convenient, the type confuses what is happening. Even though you have equalities in the context, if your function attempts to eliminate them in the wrong place everything the term will get stuck and ultimately fail.
+While you could chalk this up to implementation, I believe that what is going on here is important. Constructing the proof term within the function is convenient, however the type confuses what is happening. Even though you have equalities in the context, if your function attempts to eliminate them (in the usual way) in the wrong place everything the term will get stuck and ultimately fail. What you need to keep in mind is that some of the variables in your context are going to be "values" that you can inspect and others are going to be terms (not necesssarily closed) so you should not inspect them.
 
 Mtac does allow you to write tactics in a typed manner, but it still generates proof objects. While the terms that it constructs are not immediately re-checked by the system, they are re-checked at ```Qed``` time. Coq 8.5's ```uconstr``` feature removes some of the type checking overhead of naive Ltac, but Mtac still seems to be a lot nicer.
 
 The benefit of Mtac over computational reflection, is that Mtac
 completely avoids the need for a reflective representation which
 decreases the up-front cost to using it and trivially addresses the
-entire language including complex dependent types.
+entire language including complex dependent types, which systems like [MirrorCore]({% post_url 2015-01-18-rtac-a-fully-reflective-tactic-language %}) do not currently support (though it is [in progress](//github.com/gmalecha/mirror-core/tree/poly)).
+
+[^fn-abstract]: ```abstract``` is not strictly necessary here because Mtac's reduction mechanism will not reduce these terms anyways. However, it does hide the proof terms which makes the tactics a little bit easier to read.
 
 [^fn-mrun]: ```Mrun``` is not really a "function" in the Coq sense of the term because it does not respect equality. Essentially, if ```a = b```, ```Mrun a``` is *not* necessarily equal to ```Mrun b```.
 
