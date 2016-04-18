@@ -11,14 +11,14 @@ extra_js_head:
  - "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"
 ---
 
-I spent some time a few months ago experimenting with [Mtac](http://plv.mpi-sws.org/mtac/) and figured that I'd write a little bit about my experience.
+I spent some time experimenting with [Mtac](http://plv.mpi-sws.org/mtac/) and figured that I'd write a little bit about my experience.
 Mtac is a tactic language for Coq where you get write Gallina terms that manipulate raw Coq syntax through a monadic interface.
 
-You can get the (extensively commented) full source code at as [gist](https://gist.github.com/gmalecha/62cbdbe0f40edc7db258).
+You can get the (extensively commented) [full source code as a gist](https://gist.github.com/gmalecha/62cbdbe0f40edc7db258).
 
 ## Equality in a Commutative Monoid ##
 
-I opted to explore Mtac by building a procedure for proving equalities in a commutative monoid. Since I don't want to bother formalizing commutative monoids I'll just axiomatize them to keep the dependencies small.
+I opted to explore Mtac by building a procedure for proving equalities in a commutative monoid. Since I didn't want to bother formalizing commutative monoids I just axiomatized them to keep the dependencies small.
 
 ~~~coq
 Parameter m : Type. (* type of the monoid *)
@@ -34,7 +34,7 @@ Axiom star_assoc : forall a b c : m, (a * b) * c = a * (b * c).
 Axiom one_star   : forall a : m, one * a = a.
 ~~~
 
-Using just these theorems it is not too difficult to prove this goal, but the result is quite ugly.
+Using just these theorems it is not too difficult to prove this goal, but the result is quite horrific.
 
 ~~~coq
 Goal forall a b c : m, a * b * c = c * b * a.
@@ -45,40 +45,47 @@ Proof.
 Qed.
 ~~~
 
-Of course this quickly gets cumbersome so I'll use Mtac to write some automation.
+Of course this quickly gets cumbersome as the problem gets bigger.
+In addition, *the proof script is not robust*, i.e. small changes in the goal completely break the proof script.
+To avoid both of these issues, I'll use Mtac to write some automation.
 
 ## Mtac Basics ##
 
-The idea of Mtac is fairly simple, the Mtac plugin comes equipped with a monad ```M``` of Mtac tactics that can be used to write automation. In addition to the standard ```bind``` and ```return``` that all monads have, ```M``` also comes equipped with a bunch of operations that are not kosher in Gallina, but are exactly what is needed to inspect terms and build proofs. In particular, it comes with a ```mmatch``` operation that allows Mtac programs to inspect the *syntax* of a Gallina term similar to what Ltac's ```match``` allows you to do. To give just a flavor of how it works, here's an example of using ```mmatch``` to optimize ```star```.
+The idea of Mtac is fairly simple, Mtac is a DSL (domain-specific language) inside of Coq for writing automation.
+Mtac comes with a monad ```M``` of Mtac tactics that can be used to write automation and an evaluation mechanism (more on this later) for evaluating Mtac "programs".
+In addition to the standard ```bind``` and ```return``` that all monads have, ```M``` also comes equipped with a set of operations that are not kosher in Gallina, but are exactly what is needed to inspect terms and build proofs. In particular, it comes with an ```mmatch``` operation that allows Mtac programs to inspect the *syntax* of a Gallina term similar to what Ltac's ```match``` allows you to do. To give a flavor of how it works, here's an example of using ```mmatch``` to optimize ```star```.
 
 ~~~coq
 Definition opt_star (a b : m) : M { x : m | x = star a b }.
 refine (
   mmatch a as a return M { x : m | x = star a b } with
-  | emp => ret (@exist _ _ b _ (* first proof *))
+  | one => ret (@exist _ _ b _ (* first proof *))
   | [? z] z =>
     mmatch b as b return M { x : m | x = star z b } with
-    | emp => ret (@exist _ _ a _ (* second proof *))
+    | one => ret (@exist _ _ a _ (* second proof *))
     | _ => ret (@exist _ _ (star a b) _ (* third proof *))
     end
   end).
 ~~~
 
-The goal of ```opt_star``` is to construct a value that is equal to ```a * b``` but does not star together units, i.e. ```one * a = a``` and ```a * one = a```. Mtac matches are required to return values in the monad, and, like Coq's standard dependent pattern matching, they are dependent, i.e. the type of each branch depends on the pattern that is matched.
+The goal of ```opt_star``` is to construct a value that is equal to ```a * b``` but does not star together units, i.e. ```one * a = a``` and ```a * one = a```.
+This is codified in the types by stating that ```opt_star``` takes two terms (```a``` and ```b```) and returns a monadic operation that returns a term ```x``` and a proof that ```x = star a b```.
+The use of "term" rather than "value" here is important (even though it is not explicitly represented in the type) because each branch of the match can provide a syntactic representation that is unified against the discriminee (the term being matched on).
+```mmatch``` is required to return values in the monad, and, like Coq's standard dependent pattern matching, ```mmatch``` provides dependent matching, i.e. the type of each branch depends on the pattern that is matched.
 
-I'll use tactics to fill in the three proof obligations that arise from the commented holes in the term. The first one says the following:
+I used tactics to fill in the three proof obligations that arise from the commented holes in the term. The first one says the following:
 
 ~~~coq
 a, b : m
-e : a = emp
+e : a = one
 ============================
-b = star emp b
+b = star one b
 ~~~
 
 Which is easy to solve using ```one_star```.
 
 ~~~coq
-clear; abstract (symmetry; apply emp_star).
+clear; abstract (symmetry; apply one_star).
 ~~~
 
 Here ```abstract``` treats the result of the tactic as opaque[^fn-abstract]. ```abstract X``` constructs a new definition with the given type and solves it using ```X``` (note that ```X``` must completely solve the goal). Then it solves the goal by appealing directly to the proof. The other two proofs can be solved in a similar way.
@@ -86,20 +93,22 @@ Here ```abstract``` treats the result of the tactic as opaque[^fn-abstract]. ```
 The ```Mrun``` "function" runs the Mtac program [^fn-mrun].
 
 ~~~coq
-Let x := Mrun (mstar emp emp).
+Let x := Mrun (mstar one one).
 Print x.
-(* x = exist (fun x : m => x = star emp emp) emp (mstar_subproof emp)
- *    : {x : m | x = star emp emp}
+(* x = exist (fun x : m => x = star one one) one (mstar_subproof one)
+ *    : {x : m | x = star one one}
  *)
 ~~~
 
-```Mrun``` interprets the monadic program and replaces it with the result. Here, we see that, as the type states, the result is a pair of a term ```x``` which is ```emp``` and a proof of ```emp = mstar emp emp``` (```mstar_subproof emp```, the lemma name generated by ```abstract```).
+```Mrun``` interprets the monadic program and replaces it with the result. Here, we see that, as the type states, the result is a pair of a term ```x``` which is ```one``` and a proof of ```one = mstar one one``` (```mstar_subproof one```, the lemma name generated by ```abstract```).
 
 ## Implementing a Canceler ##
 
-To implement the canceler, I'm going to break the problem down into two phases. In the first phase, the automation will iterate through atomic elements on the left-hand side. If it is ```one``` then it will drop the element and continue. Otherwise, it will attempt to find a matching term on the right-hand side. If the automation can find a matching element, it can drop both terms; otherwise, it keeps the term on the left and continues the iteration.
+To implement the canceler, I brok the problem down into two phases.
+In the first phase, the automation will iterate through atomic elements on the left-hand side. If it is ```one``` then it will drop the element and continue. Otherwise, it will attempt to find a matching term on the right-hand side. If the automation can find a matching element on the right-hand side, it will drop both terms; otherwise, it keeps the term on the left and continue the iteration.
 
-To look at performance (which will be a thread throughout the rest of the post) I constructed the following simple code to construct arbitrarily sized problems.
+The first thing to do is build some simple problems to solve.
+The following code constructs some simple, arbitrarily large, test cases that we can use to test and evaluate performance and scalability.
 
 ~~~coq
 Require Import Coq.Lists.List.
@@ -137,7 +146,7 @@ Since the high-level cancellation function clearly depends on the ```remove``` p
 
 ### A First Attempt ###
 
-My first attempt to implement the ```remove``` function was the following. I'm usually not a user of ```Program``` but I was told that it was useful for writing Mtac code so I figured I would give it a try.
+My first attempt to implement the ```remove``` function was the following. I'm usually not a user of ```Program```[^fn-program] but I was told that it was useful for writing Mtac code so I figured I would give it a try.
 
 ~~~coq
 (** An Mtac exception **)
@@ -156,7 +165,7 @@ Program Definition remove (x : m)
         ret (@exist _ _ (il * r) _)
       with _ =>
         ir <- f r ;
-        ret (@exist _ _ (l *ir) _)
+        ret (@exist _ _ (l * ir) _)
       end
     | _ => raise NotFound
     end).
@@ -175,12 +184,12 @@ Next Obligation.
 Qed.
 ~~~
 
-Here I'm using Mtac's ```mfix1``` to construct a recursive tactic on a single argument.
+Here I used Mtac's ```mfix1``` operation to construct a recursive tactic on a single argument.
 The procedure is similar to the definition of ```opt_star``` above: the tactic returns a pair of a result and proof connecting the result to the input.
 In order to express that the element was not found, I am using Mtac's exception mechanism which is built into the ```Mtac``` monad.
 As above, I solve the subgoals with abstracted proofs.
 
-```Program``` made the implementation quite simple, but the resulting proof terms are really bad. For example, removing a single term from a star of 10 terms produces a term that is 124 lines long. Looking at the proof term, we see that the automation is embedded inside the proof term.
+```Program``` made the implementation quite simple, but the resulting proof terms are really bad. For example, removing a single term from a star of 10 terms produces a term that is 74 lines long. Looking at the proof term, we see that the automation is embedded inside the proof term.
 
 ~~~coq
 Time Check Mrun (remove (asM 9) (stars (big 10))).
@@ -195,7 +204,10 @@ Time Check Mrun (remove (asM 9) (stars (big 10))).
 To understand the problem, it is important to understand Mtac's evaluation strategy.
 
 > **Mtac Evaluation.**
-> Mtac's evaluation strategy is lazy, it uses Coq's head normal formal evaluation strategy to uncover the next monadic operation (since these are defined as an inductive type) and then implements it in the OCaml plugin. For example, to implement ```bind``` (written ```x <- c ; k```) it evaluates the first argument and, if it is a ```ret``` then it substitutes the argument in the body (```k```) and continues reducing. This is important for implementing ```mmatch``` because it ensures that the term that you are matching on is not reduced which would change its syntactic representation (and therefore the results of the match since the match is on the syntax).
+> Mtac's evaluation strategy is lazy, it uses Coq's head normal formal evaluation strategy (```hnf```) to uncover the next monadic operation (since these are defined as an inductive type) and then implements it in the OCaml plugin.
+> For example, to implement ```bind``` (written ```x <- c ; k```) it evaluates the first argument and, if it is a ```ret``` then it substitutes the argument in the body (```k```) and continues reducing.
+> Or, if ```c``` reduces to an exception, then the reduction discards ```k``` and the whole term throws the exception.
+> Performing minimal evaluation is important for implementing ```mmatch``` because it ensures that the term being matched on not reduced which would change its syntactic representation (and therefore the results of the match since the match is on the syntax).
 
 With this understanding we can look at implementation that ```Program``` constructed for us:
 
@@ -204,9 +216,9 @@ remove =
 fun x : m =>
 mfix1 f (s : m) : M {s' : m | s = x * s'} :=
    (mmatch s as s0 return M {s' : m | s0 = x * s'}
-    with x =c> [H]
+    with x =c> [H] (* H : s = x *)
        ret (exist (fun s' : m => x = x * s') one (remove_obligation_1 x f s H))
-    |  [?l r : m] l * r =c> [H]
+    |  [?l r : m] l * r =c> [H] (* H : s = l * r *)
        ttry
          (il <- f l;
        	  ret
@@ -226,7 +238,11 @@ mfix1 f (s : m) : M {s' : m | s = x * s'} :=
      : forall x s : m, M {s' : m | s = x * s'}
 ~~~
 
-The issue is the number of arguments to the proof obligations constructed by ```Program```. For example, ```remove_obligation_3``` is applied to 10 arguments, none of which will be reduced by Mtac's reduction mechanism. Further, the modular implementation of ```mfix1``` simply substitutes itself in the body which can make these arguments quite large.
+Here, the syntactic sugar for ```mmatch``` has been partially removed. The added terms [H] after each pattern (represented ```[? .. ] .. =c> [H]```) is the proof that the discriminee ```s``` is equal to the pattern (types notated inline).
+
+The performance problem with this implementation is the arguments to the proof obligations constructed by ```Program```.
+For example, ```remove_obligation_3``` is applied to 10 arguments, none of which will be reduced by Mtac's reduction mechanism since none will be in head position because the entire proof is an argument to the ```exists``` constructor.
+Further, the modular implementation of ```mfix1``` simply substitutes itself in the body which can make these arguments quite large.
 
 ### Revising the Automation with the Proof in Mind ###
 
@@ -236,7 +252,8 @@ There are two main things that we can do to make better proof terms.
      values of type ```M```.
   2. Avoid using ```Program``` to get finer granularity control over the obligations and term that is constructed.
 
-Of the two, the first is the more important; the second simply makes it easier to do this. Adopting these two techniques yields the following definition:
+Of the two, the first is the more important; the second simply makes it easier to do this since what you write is what you get.
+Adopting these two techniques leads us to the following definition:
 
 ~~~coq
 Definition remove_refine (x : m)
@@ -271,55 +288,46 @@ refine
 Defined.
 ~~~
 
+Note here that I am using ```clear``` before abstract to ensure that the subproof does not require any parameters that are not strictly necessary.
+
 If you inspect the term using ```Print``` then you will note that it is a bit simpler. The main difference, however, can be seen when we look at the proof term from our simple result.
 
 ~~~coq
 Check Mrun (remove_refine (asM 9) (stars (big 16))).
 ~~~
 
-The proof is now 16 lines (10x smaller) and takes less than a tenth of a second to construct. That's a **75x performance improvement** just from doing explicit pattern matches which were causing the automation to be embedded in the final proof.
+The proof is now 12 lines (6x smaller) and takes less than a tenth of a second to construct. That's a **45x performance improvement** just from doing explicit pattern matches.
 
 ### Cancellation ###
 
-The [accompanying gist]() has a similar comparison for the implementation of ```cancel``` but the ideas are mostly the same. The best implementation of ```cancel``` that I was able to write was the following:
+The [accompanying gist](https://gist.github.com/gmalecha/62cbdbe0f40edc7db258) has a similar comparison for the implementation of ```cancel``` but the ideas are mostly the same. The best implementation of ```cancel``` that I was able to write was the following:
 
 ~~~coq
 Definition cancel_refine
 : forall (l r : m), M { xy : m * m
-                      | forall Z, match xy with
-                                  | (x,y) => Z * x = y -> Z * l = r
-                                  end }.
+                      | forall Z, Z * fst xy = snd xy -> Z * l = r }.
 refine (
   mfix2 cancel (l : m) (r : m)
   : M { xy : m * m
-      | forall Z, match xy with
-                  | (x,y) => Z * x = y -> Z * l = r
-                  end} :=
+      | forall Z, Z * fst xy = snd xy -> Z * l = r } :=
     mmatch l as l
       return M { xy : m * m
-               | forall Z, match xy with
-                           | (x,y) => Z * x = y -> Z * l = r
-                           end }
+               | forall Z, Z * fst xy = snd xy -> Z * l = r }
     with
     | [? a' a''] star a' a'' =>
       res <- cancel a' r ;
+      (** Explicit pattern matching and casting! **)
       match res with
       | exist _ _res1 _res2 =>
-        (** NOTE the explicit pattern matching and casting! **)
-        match _res1 as res1
-              return (forall Z, match res1 with
-                                | (x,y) => Z * x = y -> Z * _ = _
-                                end) -> _
+        match _res1 as xy
+              return (forall Z, Z * fst xy = snd xy -> Z * _ = _) -> _
         with
         | (fst_res1,snd_res1) => fun res2 =>
           res' <- cancel a'' (snd_res1) ;
           match res' with
           | exist _ _res'1 _res'2 =>
-	    (** NOTE the explicit pattern matching and casting! **)
-            match _res'1 as res1
-                  return (forall Z, match res1 with
-                                    | (x,y) => Z * x = y -> Z * _ = _
-                                    end) -> _
+            match _res'1 as xy
+                  return (forall Z, Z * fst xy = snd xy -> Z * _ = _) -> _
             with
             | (fst_res'1,snd_res'1) => fun res'2 =>
               ret (@exist _ _ (fst_res1 * fst_res'1, snd_res'1) _)
@@ -328,7 +336,9 @@ refine (
         end _res2
       end
     | [? x ] x =>
+      (** NOTE: Here we capture the full term **)
       mtry
+        (** NOTE: and then we use it here **)
         res <- remove_refine x r ;
         match res with
         | exist _ res1 res2 =>
@@ -344,55 +354,23 @@ Defined.
 
 At the high level, the type of ```cancel_refine``` states that it takes in two monoidal expressions and returns a pair of monoidal expressions such that if the returned expressions are equal, then the input expressions are equal.
 However, to implement the function, we need to strengthen the recursion by introducing an extra variable ```Z``` that we star with both left-hand sides.
-This allows us to use returned results in the calling context and is analagous to strengthening the inductive hypothesis. To see why you need this, try removing the extra quantification and see where things go wrong. We can use the following theorem to convert the result of the automation to a usable form.
+This allows us to use returned results in the calling context and is analagous to strengthening the inductive hypothesis. To see why you need this, try removing the extra quantification and see where things go wrong.
 
-~~~coq
-Theorem finish_cancel (a b c d : m)
-        (pf : forall Z, Z * c = d -> Z * a = b)
-  : c = d -> a = b.
-Proof.
-  intros. specialize (pf one). subst.
-  repeat rewrite one_star in *. auto.
-Qed.
+A crucial, and subtle, part of the implementation is the final branch.
+It might seem intuitive to replace the final branch in the ```mmatch``` with ```_``` and then use ```l``` instead of ```x``` in the body.
+However, while we might think of this as being equivalent, in reality it is not.
+This is because the return type of the branch will mention the value bound by ```_``` (which does not have a name but still exists, for convenience let's say the name is ```_```).
+In that case, we will need to use the fact that ```_ = l```.
+Mtac provides us access to that information in the body using the proof object (we saw it above when we printed the definition of ```remove```).
+However, to use this proof in Coq, we need to explicitly match on it and therefore it will pollute our proof terms.
+By naming the pattern, i.e. using ```[? x ] x```, we can mention it in the branch and avoid the extra cast since all of the operations in the branch and its return type are in terms of ```x``` and not ```s```.
 
-Ltac solve_it :=
-  match goal with
-  | |- @eq m ?X ?Y =>
-    let z := constr:(Mrun (cancel_refine X Y)) in
-    match z with
-    | @exist _ _ _ ?pf =>
-      apply (@finish_cancel _ _ _ _ pf) ; reflexivity
-    end
-  end.
-~~~
+## Performance ##
 
-The crucial part of the implementation is the two pattern matches called out in the code with the ```NOTE```s. Without these pattern matches the code takes 27seconds to prove the size 5 benchmark, with the pattern matches that time goes down to 0.076 seconds (a 355x speedup).
-
-While the proof building for this is still pretty fast, manual inspection of the proof term shows that it is still far from optimal. Here is the proof term for cancelling a problem of size 2 (with .
-
-~~~coq
-(finish_cancel (asM 1 * asM 0) (asM 0 * asM 1) (one * one) (one * one)
-   (cancel_refine_subproof (asM 1 * asM 0) (asM 0 * asM 1) (asM 1) (asM 0) eq_refl one
-      (asM 0 * one)
-      (cancel_refine_subproof0 (asM 1) (asM 0 * asM 1) (asM 1) eq_refl (asM 0 * one)
-         (remove_refine_subproof1 (asM 1) (asM 0 * asM 1) (asM 0) (asM 1) eq_refl NotFound NotFound eq_refl one
-            (remove_refine_subproof (asM 1) (asM 1) eq_refl))) one (one * one)
-      (cancel_refine_subproof0 (asM 0) (asM 0 * one) (asM 0) eq_refl (one * one)
-         (remove_refine_subproof0 (asM 0) (asM 0 * one) (asM 0) one eq_refl one
-            (remove_refine_subproof (asM 0) (asM 0) eq_refl)))) eq_refl)
-~~~
-
-There are two issues here:
-
-  1. There are several occurances of ```eq_refl``` which is the proof constructor for equality proofs. This is due to the way that Mtac implements ```mmatch```. To convey the equivalence, ```mmatch``` gives its body access to the information that the discriminee unifies with the pattern through an explicit proof term (which is always instantiated with ```eq_refl``` during execution.
-
-
-
-### Performance ###
-
-The final implementation of cancellation performs pretty well but it does take a lot of care to get there. In particular, it is really important that you inspect the resulting proof terms to ensure that you are not duplicating too much information.
+The final implementation of cancellation performs pretty well but it does take a bit of care to get there. In particular, it is really important that you inspect the resulting proof terms to ensure that you are not duplicating too much information.
 
 The chart shows how the optimized Mtac automation compares to the standard Ltac implementation of cancellation on various problem sizes [^fn-chart].
+Note that the numbers are approximates and could vary significantly between computers and Coq implementations.
 
 <div id="mtac-perf"></div>
 
@@ -400,13 +378,13 @@ The chart shows how the optimized Mtac automation compares to the standard Ltac 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Size', 'Ltac' , 'Ltac-Qed', 'Mtac' , 'Mtac-Qed', 'Rtac', 'Rtac-Qed'],
-        [3,      0.007  , 0.001     , 0.038  , 0.006     , 0.020 , 0.092 ],
-        [5,      0.017  , 0.002     , 0.108  , 0.019     , 0.027 , 0.124 ],
-        [10,     0.125  , 0.011     , 0.302  , 0.101     , 0.050 , 0.201 ],
-        [20,     1.416  , 0.062     , 1.541  , 0.393     , 0.099 , 0.339 ],
-        [50,     43.206 , 0.666     , 32.917 , 5.218     , 0.341 , 0.925 ],
-        [75,     229.533, 2.338     , 153.424, 45.569    , 0.530 , 1.255 ],
-        [100,    737.690, 5.334     , 454.763, 70.458    , 0.885 , 1.830 ],
+        [3,      0.007  , 0.001     , 0.035  , 0.004     , 0.020 , 0.092 ],
+        [5,      0.017  , 0.002     , 0.077  , 0.008     , 0.027 , 0.124 ],
+        [10,     0.125  , 0.011     , 0.274  , 0.046     , 0.050 , 0.201 ],
+        [20,     1.416  , 0.062     , 1.499  , 0.189     , 0.099 , 0.339 ],
+        [50,     43.206 , 0.666     , 32.531 , 4.894     , 0.341 , 0.925 ],
+        [75,     229.533, 2.338     , 152.499, 22.158    , 0.530 , 1.255 ],
+        [100,    737.690, 5.334     , 468.428, 71.765    , 0.885 , 1.830 ],
       ]);
 
       var options = {
@@ -425,16 +403,19 @@ The chart shows how the optimized Mtac automation compares to the standard Ltac 
     google.setOnLoadCallback(drawChart);
 </script>
 
-Mtac solidly beats Ltac on most problem sizes for the search but is substantially slower on checking the final proof term. This suggests that the proof that we are building with Mtac is still far from optimal. At the high level, this can be attributed to a wildly different proof search technique, but there are also low-level optimizations that are still possible. Consider for example the following proof for the problem instance of size 2.
+Mtac solidly beats Ltac on most problem sizes for the search but is substantially slower on checking the final proof term. This suggests that the proof that we are building with Mtac is still far from optimal. At the high level, this can be attributed to a wildly different proof search technique, but there are also low-level optimizations that are still possible.
 
-Even after all of the optimization, Mtac isn't as fast as
-[computational reflection]({% post_url 2016-02-20-rtac-technical-overview %}), e.g. the [Rtac](https://github.com/gmalecha/mirror-core) implementation of cancellation solves problems of size 100 in under a second while Mtac takes 5 seconds on a problem of size 30. While it isn't very common to have such large problems, it is not uncommon when stitching automation together. For example, program verification might result in tens of calls to an entailment checker each with a goal of perhaps 10 or so conjuncts. Stitching all of these proofs together along with the reasoning about the program can quickly become costly.
+
+### Comparison with Computational Reflection ###
+
+Even after all of the optimization, Mtac is not as fast as
+[computational reflection]({% post_url 2016-02-20-rtac-technical-overview %}), e.g. the [Rtac](https://github.com/gmalecha/mirror-core) implementation of cancelation solves problems of size 100 in under a second while Mtac takes 30 seconds on a problem half the size. While it is not very common to have such large problems, it is not uncommon when stitching automation together. For example, program verification might result in tens of calls to an entailment checker each with a goal of perhaps 10 or so conjuncts. Stitching all of these proofs together along with the reasoning about the program can quickly become costly.
 
 ## Final Thoughts ##
 
-Mtac is quite convenient and light-weight to use; however, getting good performance can be a bit tricky. The main thing that you need to understand to write reasonably efficient Mtac tactics is the evaluation mechanism. The various iterations took some time but the optimizations are well worth it (over a 1000x speedup).
+Mtac is quite convenient and light-weight to use; however, getting good performance can be a bit tricky. The main thing that you need to understand to write efficient Mtac tactics is the evaluation mechanism. The various iterations took some time but the optimizations are well worth it.
 
-While you could chalk this up to implementation, I believe that what is going on here is important. Constructing the proof term within the function is convenient, however the type confuses what is happening. Even though you have equalities in the context, if your function attempts to eliminate them (in the usual way) in the wrong place everything the term will get stuck and ultimately fail. What you need to keep in mind is that some of the variables in your context are going to be "values" that you can inspect and others are going to be terms (not necesssarily closed) so you should not inspect them.
+While you could chalk this up to implementation, I believe that what is going on here is important. **Constructing the proof term within the function is convenient, however the type confuses what is happening.** Even though you have equalities in the context, if your function attempts to eliminate one (in the usual way) in the wrong place everything the term will get stuck and ultimately fail. What you need to keep in mind is that some of the variables in your context are going to be "values" that you can inspect and others are going to be terms (not necesssarily closed) so you should not inspect them using vanilla pattern matching.
 
 Mtac does allow you to write tactics in a typed manner, but it still generates proof objects. While the terms that it constructs are not immediately re-checked by the system, they are re-checked at ```Qed``` time. Coq 8.5's ```uconstr``` feature removes some of the type checking overhead of naive Ltac, but Mtac still seems to be a lot nicer.
 
@@ -444,6 +425,8 @@ decreases the up-front cost to using it and trivially addresses the
 entire language including complex dependent types, which systems like [MirrorCore]({% post_url 2015-01-18-rtac-a-fully-reflective-tactic-language %}) do not currently support (though it is [in progress](//github.com/gmalecha/mirror-core/tree/poly)).
 
 [^fn-abstract]: ```abstract``` is not strictly necessary here because Mtac's reduction mechanism will not reduce these terms anyways. However, it does hide the proof terms which makes the tactics a little bit easier to read.
+
+[^fn-program]: I think that the idea of ```Program``` is great, but for many of the [things that I work on](//github.com/gmalecha/mirror-core), computation is important and with ```Program``` you sometimes loose good computational behavior. In addition, ```Program``` sometimes quietly introdues axioms which seems like bad behavior).
 
 [^fn-mrun]: ```Mrun``` is not really a "function" in the Coq sense of the term because it does not respect equality. Essentially, if ```a = b```, ```Mrun a``` is *not* necessarily equal to ```Mrun b```.
 

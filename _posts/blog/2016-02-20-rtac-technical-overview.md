@@ -3,6 +3,11 @@ layout: post
 category: reflections
 author: gregory malecha
 title: "Rtac: Reflective Tactics in Coq"
+tags:
+- coq
+- mirror-core
+- rtac
+- computational reflection
 extra_js_head:
 - "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"
 highlight: true
