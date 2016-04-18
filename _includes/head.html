@@ -4,6 +4,12 @@
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ site.description }}">
+
+    <script>
+      if (window.location.host == '{{ site.host }}' && window.location.protocol != 'https:') { 
+        window.location.protocol = 'https:';
+      }
+    </script>
     {% if site.meta_author %}<meta name="author" content="{{ site.meta_author }}">{% endif %}
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
@@ -28,7 +34,7 @@
     <script type="application/javascript" src="{{ js_name }}"></script>
     {% endfor %}
     {% if page.highlight %}
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/syntax.css">
+    <link rel="stylesheet" type="text/css" href="//{{ site.baseurl }}/css/syntax.css">
     {% endif %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
