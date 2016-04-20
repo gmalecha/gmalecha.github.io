@@ -42,7 +42,7 @@
           <!--                      pull-right keeps the drop-down in line -->
           <ul class="nav navbar-nav pull-right">
             <li class="hidden"><a href="#page-top"></a></li>
-	    <li class="page-scroll{% if page.category contains 'blog' %} current{% endif %}">
+	    <li class="page-scroll{% if page.category contains 'blog' or page.category contains 'reflections' %} current{% endif %}">
 	      <a href="{{ blog }}">Reflections</a>
 	    </li>
             <li class="page-scroll">
