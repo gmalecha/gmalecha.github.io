@@ -78,6 +78,8 @@ nav li.current {
     background-color: #{{ site.color.primary }};
 }
 
+.nav { background-color: #{{ site.color.dark-primary }}; }
+
 .nav li.current a:hover {
     color: black;
 }
@@ -192,3 +194,19 @@ section {
 .tag {
     font-size: 8pt;
 }
+
+article > section:nth-of-type(2) > div > p:first-of-type:first-letter {
+    position: relative;
+    font-size: 5rem;
+    float: left;
+    display: inline-block;
+    margin: 2px 6px -2px 0;
+    padding: 0px;
+    line-height: 5.25rem;
+}
+
+/*
+body {
+font-family: "Alegreya", Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+}
+*/

@@ -55,7 +55,7 @@ permalink: pretty
 projects:
   - title: Mirror-Core
     descr: >
-      MirrorCore is a framework for easing the burden of building compositional reflective procedures in the Coq proof assistant.
+      MirrorCore is a framework for easing the burden of building reflective automation in Coq proof assistant.
     url: https://github.com/gmalecha/mirror-core
   - title: Ext-Lib
     descr: >
