@@ -104,7 +104,7 @@ Print x.
 
 ## Implementing a Canceller ##
 
-To implement the canceller, I brok the problem down into two phases.
+To implement the canceller, I broke the problem down into two phases.
 In the first phase, the automation will iterate through atomic elements on the left-hand side. If it is ```one``` then it will drop the element and continue. Otherwise, it will attempt to find a matching term on the right-hand side. If the automation can find a matching element on the right-hand side, it will drop both terms; otherwise, it keeps the term on the left and continue the iteration.
 
 The first thing to do is build some simple problems to solve.
