@@ -20,7 +20,7 @@ You can get the (extensively commented) [full source code as a gist](https://gis
 
 I opted to explore Mtac by building a procedure for proving equalities in a commutative monoid. Since I didn't want to bother formalizing commutative monoids I just axiomatized them to keep the dependencies small.
 
-~~~coq
+~~~
 Parameter m : Type. (* type of the monoid *)
 Parameter star : m -> m -> m.
 Local Infix "*" := star.
@@ -36,7 +36,7 @@ Axiom one_star   : forall a : m, one * a = a.
 
 Using just these theorems it is not too difficult to prove this goal, but the result is quite horrific.
 
-~~~coq
+~~~
 Goal forall a b c : m, a * b * c = c * b * a.
 Proof.
   intros.
@@ -55,7 +55,7 @@ The idea of Mtac is fairly simple, Mtac is a DSL (domain-specific language) insi
 Mtac comes with a monad ```M``` of Mtac tactics that can be used to write automation and an evaluation mechanism (more on this later) for evaluating Mtac "programs".
 In addition to the standard ```bind``` and ```return``` that all monads have, ```M``` also comes equipped with a set of operations that are not kosher in Gallina, but are exactly what is needed to inspect terms and build proofs. In particular, it comes with an ```mmatch``` operation that allows Mtac programs to inspect the *syntax* of a Gallina term similar to what Ltac's ```match``` allows you to do. To give a flavor of how it works, here's an example of using ```mmatch``` to optimize ```star```.
 
-~~~coq
+~~~
 Definition opt_star (a b : m) : M { x : m | x = star a b }.
 refine (
   mmatch a as a return M { x : m | x = star a b } with
@@ -75,7 +75,7 @@ The use of "term" rather than "value" here is important (even though it is not e
 
 I used tactics to fill in the three proof obligations that arise from the commented holes in the term. The first one says the following:
 
-~~~coq
+~~~
 a, b : m
 e : a = one
 ============================
@@ -84,7 +84,7 @@ b = star one b
 
 Which is easy to solve using ```one_star```.
 
-~~~coq
+~~~
 clear; abstract (symmetry; apply one_star).
 ~~~
 
@@ -92,7 +92,7 @@ Here ```abstract``` treats the result of the tactic as opaque[^fn-abstract]. ```
 
 The ```Mrun``` "function" runs the Mtac program [^fn-mrun].
 
-~~~coq
+~~~
 Let x := Mrun (mstar one one).
 Print x.
 (* x = exist (fun x : m => x = star one one) one (mstar_subproof one)
@@ -110,7 +110,7 @@ In the first phase, the automation will iterate through atomic elements on the l
 The first thing to do is build some simple problems to solve.
 The following code constructs some simple, arbitrarily large, test cases that we can use to test and evaluate performance and scalability.
 
-~~~coq
+~~~
 Require Import Coq.Lists.List.
 Axiom asM : nat -> m. (** Just a way to construct 'm's **)
 
@@ -148,7 +148,7 @@ Since the high-level cancellation function clearly depends on the ```remove``` p
 
 My first attempt to implement the ```remove``` function was the following. I'm usually not a user of ```Program```[^fn-program] but I was told that it was useful for writing Mtac code so I figured I would give it a try.
 
-~~~coq
+~~~
 (** An Mtac exception **)
 Definition NotFound : Exception.
   exact exception.
@@ -191,7 +191,7 @@ As above, I solve the subgoals with abstracted proofs.
 
 ```Program``` made the implementation quite simple, but the resulting proof terms are really bad. For example, removing a single term from a star of 10 terms produces a term that is 74 lines long. Looking at the proof term, we see that the automation is embedded inside the proof term.
 
-~~~coq
+~~~
 Time Check Mrun (remove (asM 9) (stars (big 10))).
 (** exist (fun s' : m => asM 9 * stars (big 9) = asM 9 * s')
   (proj1_sig
@@ -211,7 +211,7 @@ To understand the problem, it is important to understand Mtac's evaluation strat
 
 With this understanding we can look at implementation that ```Program``` constructed for us:
 
-~~~coq
+~~~
 remove =
 fun x : m =>
 mfix1 f (s : m) : M {s' : m | s = x * s'} :=
@@ -255,7 +255,7 @@ There are two main things that we can do to make better proof terms.
 Of the two, the first is the more important; the second simply makes it easier to do this since what you write is what you get.
 Adopting these two techniques leads us to the following definition:
 
-~~~coq
+~~~
 Definition remove_refine (x : m)
 : forall (s : m), M { s' : m | s = x * s' }.
 refine
@@ -292,7 +292,7 @@ Note here that I am using ```clear``` before abstract to ensure that the subproo
 
 If you inspect the term using ```Print``` then you will note that it is a bit simpler. The main difference, however, can be seen when we look at the proof term from our simple result.
 
-~~~coq
+~~~
 Check Mrun (remove_refine (asM 9) (stars (big 16))).
 ~~~
 
@@ -302,7 +302,7 @@ The proof is now 12 lines (6x smaller) and takes less than a tenth of a second t
 
 The [accompanying gist](https://gist.github.com/gmalecha/62cbdbe0f40edc7db258) has a similar comparison for the implementation of ```cancel``` but the ideas are mostly the same. The best implementation of ```cancel``` that I was able to write was the following:
 
-~~~coq
+~~~
 Definition cancel_refine
 : forall (l r : m), M { xy : m * m
                       | forall Z, Z * fst xy = snd xy -> Z * l = r }.

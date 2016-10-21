@@ -65,8 +65,9 @@ layout: default
 	  {% for post in publications limit:5 %}
 	  <li><a href="{{ post.url }}">{{ post.title }}</a> on {{ post.date | date: "%b %-d, %Y" }}</li>
 	  {% endfor %}
-	  {% if publications | size > 5 %}
-	  <li><a href="{{ base_url }}/publications/">...more...</a></li>
+	  {% assign psize = publications|size %}
+	  {% if psize > 5 %}
+	  <li><a href="{{ "/publications/" | relative_url }}">...more...</a></li>
 	  {% endif %}
 	  </ul>
       </div>

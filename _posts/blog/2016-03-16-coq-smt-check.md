@@ -33,7 +33,7 @@ At the moment, Z3 is the most tested of these solvers but try other ones and [pl
 
 To try out the plugin, you can start up coqtop and run the following:
 
-~~~coq
+~~~
 Require Import Coq.Reals.Reals.
 Require Import SMTC.Tactic. (** Load the SMT tactic **)
 
@@ -82,20 +82,20 @@ Concretely, the plugin knows how to interpret the following symbols:
 
 All other terms of type ```R``` and ```Prop``` are abstracted as opaque symbols meaning that an expression such as:
 
-~~~coq
+~~~
 f x - 3 > 0 -> f x + 3 > 0
 ~~~
 
 will be passed to the solver as
 
-~~~coq
+~~~
 X - 3 > 0 -> X + 3 > 0
 ~~~
 
 in this problem this isn't an issue, but it can make some things a little bit confusing.
 For example, the solver will fail to prove:
 
-~~~coq
+~~~
 true = true
 ~~~
 
@@ -106,7 +106,7 @@ It also keeps us honest and forces us to do all of reasoning that is not about r
 In addition, recall that SMT solvers are classical in nature meaning if they say 'UNSAT' (which is what we care about) it does not mean that there is a constructive proof, only a classical proof.
 For example, Z3 will happily prove the following:
 
-~~~coq
+~~~
 Goal forall P : Prop, P \/ ~ P.
   intros.
   smt solve; apply by_smt.
@@ -117,7 +117,7 @@ even though this type is clearly not inhabited in Coq without an axiom.
 If the SMT solver returns 'SAT' (and produces a model) the model is printed to the console (in addition to the tactic failing).
 For example,
 
-~~~coq
+~~~
 Goal forall x : R, x > 0.
   intros.
   smt solve.

@@ -31,7 +31,7 @@ Rtac is a reflective tactic language built on top of the [MirrorCore](https://gi
 From the client point of view, ```rtac``` tactics are just elements of a data type and sound tactics are those that satisfy a particular property, namely ```rtac_sound```.
 Here is a slightly simplified version [^fn-rtac-simplifications].
 
-~~~coq
+~~~
 (* The "raw" type of tactics *)
 Definition rtac : Type.
 
@@ -72,7 +72,7 @@ The core Rtac tactics are quite similar to the Ltac ones.
 A common tactic is ```ASSUMPTION``` which searches for a hypothesis that unifies with the current goal.
 Its definition (and its corresponding soundness proof) is quite simple
 
-~~~coq
+~~~
 (* Search for an assumption matching the goal in the context *)
 Definition ASSUMPTION : rtac := ...
 
@@ -86,7 +86,7 @@ A few other basic tactics are ```INTRO``` and ```EEXISTS``` which have similar s
 
 The workhorse of Rtac is the ```EAPPLY``` tactic which applies a syntactic representation of a lemma to the current goal [^fn-syntactic-lemmas].
 
-~~~coq
+~~~
 Record lemma : Type :=
 { vars := list typ
 ; prems := list expr
@@ -107,7 +107,7 @@ If that unification succeeds, it produces a new subgoal for each premise in the 
 While the reasoning that goes into its proof is a bit subtle, from the client point of view, using it is quite simple.
 For example,
 
-~~~coq
+~~~
 EAPPLY plus_comm_lem
 ~~~
 
@@ -135,7 +135,7 @@ They include, for example:
 Using these combinators, we can write tactics that do backtracking search.
 For example, if we want to do a depth-first search for a proof using a few lemmas, we could write the following:
 
-~~~coq
+~~~
 Definition search n : rtac :=
   REC n (fun rec => FIRST [ SOLVE [ EAPPLY lem1_lem ;; rec ]
                           | SOLVE [ EAPPLY lem2_lem ;; rec ]
@@ -144,7 +144,7 @@ Definition search n : rtac :=
 
 Proving `search` sound is trivial using the soundness of the individual tactics.
 
-~~~coq
+~~~
 Theorem search_sound : forall n, rtac_sound (search n).
 Proof.
   eapply REC_sound; intros.
@@ -166,7 +166,7 @@ Qed.
 
 Of course, since the proof is so regular, it is quite easy to automate:
 
-~~~coq
+~~~
 Theorem search_sound : forall n, rtac_sound (search n).
 Proof.
   unfold search; intros.
@@ -184,7 +184,7 @@ Tactic continuations generalize tactics to be able to inspect multiple parallel 
 To see how they fit into the landscape of tactics, consider applying a tactic such as `split` (which would be implemented in Rtac using `EAPPLY conj`).
 Recall that `conj` is the constructor for `/\` so it has the type:
 
-~~~coq
+~~~
 Check conj.
 (* conj
  *   : forall A B : Prop, A -> B -> A /\ B
@@ -207,7 +207,7 @@ Using just the core tactics and tacticals, it is easy to build a tactic that per
 The code is adapted from the [Ynot cancellation algorithm]({% post_url 2009-08-31-effective-interactive-proofs-for-higher-order-imperative-programs %}).
 The code (simplified to be in line with this post) is the following:
 
-~~~coq
+~~~
 (* The unifier is a parameter. This allows custom cancellation rather than
  * being restricted to syntactic cancellation. For example, cancelling
  * [foo] with [bar] given a premise [foo = bar], or cancelling
