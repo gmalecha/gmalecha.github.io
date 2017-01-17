@@ -1,0 +1,28 @@
+{% unless page.noheader %}
+{% if page.poster contains "http:" or page.poster contains "https:" %}
+{% assign poster_image = page.poster %}
+{% elsif page.poster %}
+{% capture poster_image %}{{ "/img/" }}{{ page.poster }}.jpg{% endcapture %}
+{% else %}
+{% assign random = page.title|length %}
+{% case random|modulo:3 %}
+{% when 0 %}
+{% assign poster_image = "/img/redwoods.jpg" %}
+{% when 1 %}
+{% assign poster_image = "/img/pond.jpg" %}
+{% else %}
+{% assign poster_image = "/img/franconia.jpg" %}
+{% endcase %}
+{% endif %}
+
+<header>
+  <div class="carousel-item active">
+    <!--Mask color-->
+    <div class="view">
+      <img src="{{ poster_image }}" class="img-fluid" alt="">
+      <div class="full-bg-img">
+      </div>
+    </div>
+  </div>
+</header>
+{% endunless %}

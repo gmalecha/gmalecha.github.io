@@ -1,12 +1,13 @@
 ---
 layout: default
 ---
-<article class="container">
-  <div class="row">
-  <div class="{{ site.layout.margin-class-wide }}">
-    <h2>{{ page.title }}</h2>
+<article class="container-fluid" style="margin-top: -20pt;">
+  <div class="card">
+    <div class="card-block">
+      <div class="{{ site.layout.margin-class-wide }}">
+	<h2>{{ page.title }}</h2>
+      </div>
+    </div>
+    {{ content }}
   </div>
-  </div>
-
-  {{ content }}
 </article>

@@ -1,15 +1,80 @@
 {% if page.url == '/' %}
 {% assign top = '#page-top' %}
-{% assign project = '#projects' %}
+{% assign projects = '/projects/' %}
+{% assign site_sep = '' %}
 {% else %}
+{% assign site_sep = '&vdash;' %}
 {% assign top = '/' %}
 {% assign blog = '/reflections/' %}
-{% assign project = '/#projects' %}
+{% assign projects = '/projects/' %}
 {% assign publications = '/publications/' %}
 {% endif %}
 {% assign blog = '/reflections/' %}
 {% assign publications = '/publications/' %}
 
+<!--Navbar-->
+<nav class="navbar navbar-fixed-top navbar-dark" style="background-color: rgba(5,5,10,0.8)">
+  <div class="container-fluid">
+    <!--Navbar Brand-->
+    {% if page.url == '/' %}
+    <a href="{{ top }}" class="navbar-brand">
+      <img style="height: 34px; margin-top: 0pt; margin-bottom: 0pt; margin-right: 5pt;" src="{{ "/img/gregory-malecha.jpg" }}" />
+      {{ site_sep }} {{ page.title }}
+    </a>
+    {% else %}
+    <a href="{{ top }}" class="navbar-brand">
+      <img style="height: 34px; margin-top: 0pt; margin-bottom: 0pt; margin-right: 5pt;" src="{{ "/img/gregory-malecha.jpg" }}" />
+      {{ site_sep }} {{ page.collection }}
+    </a>
+    {% endif %}
+
+
+    <!-- Collapse button-->
+    <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+        <i class="fa fa-bars"></i>
+    </button>
+
+
+    <!--Collapse content-->
+    <div class="collapse navbar-toggleable-sm" id="collapseEx2">
+      <!--Links-->
+      <ul class="nav navbar-nav float-xs-right">
+        <!-- <li class="nav-item active"> -->
+        <!--     <a class="nav-link">Home <span class="sr-only">(current)</span></a> -->
+        <!-- </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="{{ blog }}" title="blog"><i class="fa fa-book" aria-hidden="true"></i>Reflections</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ publications }}" title="publications"><i class="fa fa-university" aria-hidden="true"></i>Publications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ projects }}" title="publications"><i class="fa fa-wrench" aria-hidden="true"></i>Projects</a>
+        </li>
+        <!-- <li class="nav-item btn-group"> -->
+        <!--   <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Projects"><i class="fa fa-wrench" aria-hidden="true"></i>Projects</a> -->
+        <!--   <div class="dropdown-menu" aria-labelledby="dropdownMenu1"> -->
+        <!--     <a class="dropdown-item">MirrorCore</a> -->
+        <!--     <a class="dropdown-item">ExtLib</a> -->
+        <!--     <a class="dropdown-item">ChargeCore</a> -->
+        <!--   </div> -->
+        <!-- </li> -->
+	<li class="nav-item">
+	  <a class="nav-link waves-effect waves-light" href="/feed.xml"><i class="fa fa-rss fa-lg" aria-hidden="true"></i></a>
+	</li>
+      </ul>
+      <!--Search form-->
+      <!-- <form class="form-inline"> -->
+      <!--     <input class="form-control" type="text" placeholder="Search"> -->
+      <!-- </form> -->
+    </div>
+    <!--/.Collapse content-->
+
+  </div>
+</nav>
+<!--/.Navbar-->
+
+{% comment %}
    <!-- Navigation -->
     <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -27,7 +92,7 @@
         <!-- 'Sticky' (non-collapsing) right-side menu item(s) -->
         <div class="navbar-header pull-right">
           <ul class="nav pull-right">
-	    <li class="nav-rss"><a href="{{ "/feed.xml" | absolute_url }}">
+	    <li class="nav-rss"><a href="{{ site.base_url }}/feed.xml">
 		<i class="fa fa-rss"></i>
 	    </a></li>
             <!-- Add any additional bootstrap header items.  This is a drop-down from an icon -->
@@ -109,4 +174,5 @@
     <div class="nav-spacer"></div>
 {% comment %}
     <div class="dev-trial"></div>
+{% endcomment %}
 {% endcomment %}

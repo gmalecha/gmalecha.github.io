@@ -1,12 +1,12 @@
- <!-- jQuery Version 1.11.0 -->
-    <script src="{{ "/js/jquery-1.11.0.js" | relative_url }}"></script>
+<script type="text/javascript" src="{{ "/js/jquery-3.1.1.min.js" }}"></script>
+<script type="text/javascript" src="{{ "/js/tether.min.js" }}"></script>
+<script type="text/javascript" src="{{ "/js/bootstrap.min.js" }}"></script>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
+{% comment %}
+<script type="application/javascript" src="{{ "/js/site.js" }}"></script>
+{% endcomment %}
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ "/js/bootstrap.min.js" | relative_url }}"></script>
-
-    <!-- Plugin JavaScript -->
-
-    {% if site.contact == "disqus" %}
-    <!-- Disqus Stuff -->
-    {% include js_disqus.html %}
-    {% endif %}
+{% if site.contact == "disqus" %}
+<!-- Disqus Stuff -->
+{% include js_disqus.html %}
+{% endif %}

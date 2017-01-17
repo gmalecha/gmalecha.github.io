@@ -1,26 +1,115 @@
 ---
-layout: default
+layout: listing
+cards:
+- name
+- pubs
+- projects
+title: Gregory Malecha
 ---
 
-    <header>
-      <div class="container">
-	<div class="row">
-        <div class="col-xs-4 col-md-3 col-md-offset-1 col-lg-offset-1 col-lg-2 vcenter">
-          <img class="img-responsive img-rounded"
-	       style="max-height: 100pt; text-align: center;" src="img/gregory-malecha.jpg" alt="">
-        </div><!--
-     --><div class="col-xs-8 col-md-6 col-lg-6 text-left vcenter">
-	  <h1>Gregory Malecha</h1>
-	  <div class="light-primary" style="font-size: 18pt">gmalecha at gmail dot com</div>
-	  <div class="light-primary" style="font-size: 18pt">
-	    <a class="github-button" href="https://github.com/gmalecha" aria-label="Follow @gmalecha on GitHub">Follow</a>
-	    <a href="https://twitter.com/gregory_malecha" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @gregory_malecha</a>
-	  </div>
-	</div>
-	</div>
-      </div>
-    </header>
+{% assign posts = site.categories['reflections'] | sort: 'date' | reverse %}
+{% for post in posts limit:5 %}
+<li class="card" style="margin-bottom: 20pt;">
+  <div class="card-block">
+    <h4 class="card-title">{{ post.title }}</h4>
+    <small>{{ post.date | date: "%b %-d, %Y" }}</small>
+    <blockquote class="card-text">
+      {{ post.excerpt | strip }}
+    </blockquote>
+    <a href="{{ post.url }}" class="btn btn-primary btn-floating btn-action circle">
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</li>
+{% endfor %}
+{% if posts.size > 5 %}
+<li class="card" style="margin-bottom: 20pt;">
+  <div class="card-block">
+    Read more
+  </div>
+</li>
+{% endif %}
 
+
+{% comment %}
+<section class="container-fluid" style="margin-top: -20pt;">
+
+  <!--Card-->
+  <ul class="col-md-8">
+    {% assign posts = site.categories['reflections'] | sort: 'date' | reverse %}
+    {% for post in posts limit:5 %}
+    <li class="card" style="margin-bottom: 20pt;">
+      <div class="card-block">
+	<h4 class="card-title">{{ post.title }}</h4>
+	<small>{{ post.date | date: "%b %-d, %Y" }}</small>
+	<blockquote class="card-text">
+	  {{ post.excerpt | strip }}
+	</blockquote>
+	<a href="{{ post.url }}" class="btn btn-primary btn-floating btn-action circle">
+	  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+	</a>
+      </div>
+    </li>
+    {% endfor %}
+    {% if posts.size > 5 %}
+    <li class="card" style="margin-bottom: 20pt;">
+      <div class="card-block">
+	more...
+      </div>
+    </li>
+    {% endif %}
+  </ul>
+  <div class="col-md-4">
+
+    {% include name-card.html %}
+
+    <div class="card">
+
+      <!--Card content-->
+      <div class="card-block">
+        <!--Title-->
+        <h4 class="card-title">Latest Publications</h4>
+        <!--Text-->
+        <p class="card-text">
+	  <ul class="truncating-children">
+	    {% assign posts = site.categories['publication'] | sort: 'date' | reverse %}
+	    {% for post in posts limit:5 %}
+	    <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+	    {% endfor %}
+	  </ul>
+	</p>
+      </div>
+      <!--/.Card content-->
+
+    </div>
+
+    <div class="card">
+
+      <a href="#" class="btn btn-primary btn-floating btn-action circle">
+	<i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </a>
+
+
+      <!--Card content-->
+      <div class="card-block">
+        <!--Title-->
+        <h4 class="card-title">Projects</h4>
+        <!--Text-->
+        <p class="card-text">
+	  <ul>
+	    <li>Modular Deductive Verification of Sampled-Data Systems</li>
+	    <li>Towards Foundational Verification of Cyber-physical Systems</li>
+	  </ul>
+	</p>
+      </div>
+      <!--/.Card content-->
+
+    </div>
+    <!--/.Card-->
+  </div>
+</section>
+
+{% comment %}
     <section id="blog" class="container">
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
@@ -65,14 +154,16 @@ layout: default
 	  {% for post in publications limit:5 %}
 	  <li><a href="{{ post.url }}">{{ post.title }}</a> on {{ post.date | date: "%b %-d, %Y" }}</li>
 	  {% endfor %}
-	  {% assign psize = publications|size %}
-	  {% if psize > 5 %}
-	  <li><a href="{{ "/publications/" | relative_url }}">...more...</a></li>
+	  {% assign publications_size = publications | size %}
+	  {% if publications_size > 5 %}
+	  <li><a href="{{ base_url }}/publications/">...more...</a></li>
 	  {% endif %}
 	  </ul>
       </div>
     </div>
     </section>
+{% endcomment %}
 
 <script async defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+{% endcomment %}

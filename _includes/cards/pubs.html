@@ -1,0 +1,15 @@
+<div class="card">
+
+  <div class="card-block">
+    <h4 class="card-title">Latest Publications</h4>
+    <p class="card-text">
+      <ul class="truncating-children">
+	{% assign posts = site.categories['publication'] | sort: 'date' | reverse %}
+	{% for post in posts limit:5 %}
+	<li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+	{% endfor %}
+      </ul>
+    </p>
+  </div>
+
+</div>

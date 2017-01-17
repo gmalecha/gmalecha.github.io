@@ -1,33 +1,67 @@
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>{{ site.footer.social }}</h3>
-                        <ul class="list-inline">
-                            {% for network in site.social %}
-                            <li>
-                                <a href="{{ network.url }}" class="btn-social btn-outline"><i class="fa fa-fw fa-{{ network.title }}"></i></a>
-                            </li>
-		            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-	  Copyright &copy; {{ site.footer.copyright }} 20{{ site.time | date: '%y' }}
-        </div>
-    </footer>
+<footer class="page-footer center-on-small-only">
 
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll visible-xs visible-sm">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
+    <!--Social buttons-->
+    <div class="social-section">
+        <ul>
+	  {% for network in site.social %}
+	  <li>
+	    <a class="btn btn-floating btn-small circle btn-{{ network.title }} waves-effect waves-light" href="{{ network.url }}">
+	      <i class="fa fa-{{ network.title }}"></i>
+	    </a>
+	  </li>
+	  {% endfor %}
+        </ul>
     </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 offset-md-1">
+              <h5 class="title">Gregory Malecha</h5>
+              <p>Mullings on <b>computer science</b> and <b>math</b>, from formal methods to machine learning</p>
+            </div>
+
+            <hr class="hidden-md-up">
+
+            <div class="col-md-2 offset-md-1">
+                <h5 class="title">Reflections</h5>
+                <ul class="truncating-children">
+		  {% assign posts = site.categories['reflections'] | sort: 'date' | reverse %}
+		  {% for post in posts limit:5 %}
+		  <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+		  {% endfor %}
+                </ul>
+            </div>
+
+            <hr class="hidden-md-up">
+
+            <div class="col-md-2">
+                <h5 class="title">Publications</h5>
+                <ul class="truncating-children">
+		  {% assign posts = site.categories['publication'] | sort: 'date' | reverse %}
+		  {% for post in posts limit:5 %}
+		  <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+		  {% endfor %}
+                </ul>
+            </div>
+
+            <hr class="hidden-md-up">
+
+            <div class="col-md-2">
+              <h5 class="title">Projects</h5>
+              <ul class="truncating-children">
+		{% for proj in site.projects %}
+                <li><a href="{{ proj.url }}" title="{{ proj.title }}">{{ proj.title }}</a></li>
+		{% endfor %}
+              </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <div class="footer-copyright" style="background-color: rgba(0,0,0,0.8);">
+        <div class="container-fluid">
+          	  Copyright &copy; {{ site.footer.copyright }} 20{{ site.time | date: '%y' }}
+        </div>
+    </div>
+</footer>

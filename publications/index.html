@@ -1,8 +1,31 @@
 ---
-layout: page-wide
+layout: listing
 title: Publications & Talks
 category: publication
+poster: redwoods
 ---
+
+{% for post in site.posts %}
+{% if post.categories contains "publication" or post.categories contains "talk" %}
+<li class="card" style="margin-bottom: 20pt; position: relative;">
+  <div class="card-block">
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <h4>{{ post.authors }}</h4>
+    <small>{{ post.where }} - {{ post.date | date: "%Y" }}</small>
+    <!-- <p class="card-text"> -->
+    <!--   {{ post.abstract }} -->
+    <!-- </p> -->
+     <div style="text-align: right">
+       {% for tg in post.tags %}
+       <span class="tag grey">{{ tg }}</span>
+       {% endfor %}
+     </div>
+</li>
+{% endif %}
+{% endfor %}
+
+
+{% comment %}
 <div class="row">
   <div class="{{ site.layout.margin-class-wide }}">
     <table class="table">
@@ -24,3 +47,4 @@ category: publication
     </table>
   </div>
 </div>
+{% endcomment %}

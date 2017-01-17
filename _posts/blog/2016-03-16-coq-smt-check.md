@@ -12,7 +12,7 @@ title: Using SMT Solvers in Coq 8.5
 During my post-doc at UCSD I've been working on verifying cyber-physical systems in the [VeriDrone](http://veridrone.ucsd.edu) project.
 Cyber-physical systems are just systems that interact with the real world (think quadcopters, cars, planes, hydro-electric dams, and robots).
 The interesting thing about verifying cyber-physical systems in Coq is that they require *a lot* of reasoning about continuous mathematics, real numbers, differential equations, and all that.
-Coq does a great job at all of the discrete reasoning that we do (see my previous blog post on [embedding logics in Coq]({% post_url 2015-12-18-embedding-a-logic-in-coq %})) but at the end of all the nice theory, problems often boil down to mundane reasoning about real arithmetic.
+Coq does a great job at all of the discrete reasoning that we do (see my previous blog post on [embedding logics in Coq]({% post_url blog/2015-12-18-embedding-a-logic-in-coq %})) but at the end of all the nice theory, problems often boil down to mundane reasoning about real arithmetic.
 In this post I'm going to discuss a plugin that I wrote to call SMT solvers from Coq.
 
 **Caveat**: The plugin currently does not import proof objects back into Coq (that is an interesting area of research), so, at least for the time being, you need to ```admit``` the goals that it proves.
@@ -82,20 +82,20 @@ Concretely, the plugin knows how to interpret the following symbols:
 
 All other terms of type ```R``` and ```Prop``` are abstracted as opaque symbols meaning that an expression such as:
 
-~~~
+~~~coq
 f x - 3 > 0 -> f x + 3 > 0
 ~~~
 
 will be passed to the solver as
 
-~~~
+~~~coq
 X - 3 > 0 -> X + 3 > 0
 ~~~
 
 in this problem this isn't an issue, but it can make some things a little bit confusing.
 For example, the solver will fail to prove:
 
-~~~
+~~~coq
 true = true
 ~~~
 
@@ -106,7 +106,7 @@ It also keeps us honest and forces us to do all of reasoning that is not about r
 In addition, recall that SMT solvers are classical in nature meaning if they say 'UNSAT' (which is what we care about) it does not mean that there is a constructive proof, only a classical proof.
 For example, Z3 will happily prove the following:
 
-~~~
+~~~coq
 Goal forall P : Prop, P \/ ~ P.
   intros.
   smt solve; apply by_smt.
@@ -117,7 +117,7 @@ even though this type is clearly not inhabited in Coq without an axiom.
 If the SMT solver returns 'SAT' (and produces a model) the model is printed to the console (in addition to the tactic failing).
 For example,
 
-~~~
+~~~coq
 Goal forall x : R, x > 0.
   intros.
   smt solve.

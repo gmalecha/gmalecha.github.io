@@ -29,9 +29,7 @@ color:
   primary-text: 212121
   secondary-text: 727272
   divider-color: B6B6B6
-layout:
-  margin-class: col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8
-  margin-class-wide: col-md-offset-1 col-md-10
+
 
 # Footer settings
 footer:
@@ -54,11 +52,11 @@ kramdown:
 permalink: pretty
 
 projects:
-  - title: Mirror-Core
+  - title: Mirror Core
     descr: >
       MirrorCore is a framework for easing the burden of building reflective automation in Coq proof assistant.
     url: https://github.com/gmalecha/mirror-core
-  - title: Ext-Lib
+  - title: ExtLib
     descr: >
       ExtLib is an extension to Coq's standard library which embraces new features such as universe polymorphism, primitive projections, and type classes.
     url: https://github.com/coq-ext-lib/coq-ext-lib
