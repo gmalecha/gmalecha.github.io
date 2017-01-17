@@ -1,0 +1,41 @@
+---
+layout: listing
+title: Projects
+---
+
+{% for proj in site.projects %}
+{% capture layout %}{% cycle 'left', 'right' %}{% endcapture %}
+{% if layout == 'left' %}
+<li class="card project" title="MirrorCore">
+  <div class="card-block container-fluid">
+  <div class="offset-md-1 col-md-3">
+    <img src="http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png" class="logo align-middle img-responsive" />
+  </div>
+  <div class="col-md-7">
+    <h4>{{ proj.title }}</h4>
+    <p>{{ proj.descr }}</p>
+    <p style="text-align: right; margin-top: -15pt;">
+      {% capture icon %}{% if proj.url contains 'github.com' %}fa-github{% else %}fa-chevron-right{% endif %}{% endcapture %}
+      <a href="{{ proj.url }}" class="btn btn-primary waves-effect">Check it out <i class="fa {{ icon }} right"></i></a>
+    </p>
+  </div>
+  </div>
+</li>
+{% else %}
+<li class="card project" title="ExtLib">
+  <div class="card-block container-fluid">
+  <div class="offset-md-1 col-md-7">
+    <h4>{{ proj.title }}</h4>
+    <p>{{ proj.descr }}</p>
+    <p style="text-align: right; margin-top: -15pt;">
+      {% capture icon %}{% if proj.url contains 'github.com' %}fa-github{% else %}fa-chevron-right{% endif %}{% endcapture %}
+      <a href="{{ proj.url }}" class="btn btn-primary waves-effect">Check it out<i class="fa {{ icon }} right"></i></a>
+    </p>
+  </div>
+  <div class="col-md-3">
+    <img src="http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png" class="logo align-middle img-responsive" />
+  </div>
+  </div>
+</li>
+{% endif %}
+{% endfor %}
