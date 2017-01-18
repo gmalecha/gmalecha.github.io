@@ -6,7 +6,9 @@
 <script type="application/javascript" src="{{ "/js/site.js" }}"></script>
 {% endcomment %}
 <script async src="https://static.addtoany.com/menu/page.js"></script>
-
+{% for js_name in page.extra_js %}
+<script type="application/javascript" src="{{ js_name }}"></script>
+{% endfor %}
 {% if site.contact == "disqus" %}
 <!-- Disqus Stuff -->
 {% include js_disqus.html %}

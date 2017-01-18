@@ -1,4 +1,6 @@
-{% unless page.noheader %}
+{% if page.noheader %}
+<div style="height: 40pt; display: block; "></div>
+{% else %}
 {% if page.poster contains "http:" or page.poster contains "https:" %}
 {% assign poster_image = page.poster %}
 {% elsif page.poster %}
@@ -14,7 +16,6 @@
 {% assign poster_image = "/img/franconia.jpg" %}
 {% endcase %}
 {% endif %}
-
 <header>
   <div class="carousel-item active">
     <!--Mask color-->
@@ -25,4 +26,4 @@
     </div>
   </div>
 </header>
-{% endunless %}
+{% endif %}
