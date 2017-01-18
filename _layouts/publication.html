@@ -3,7 +3,7 @@ layout: card-page
 ---
   <h2>{{ page.title }}</h2>
   <h4 class="authors">{{ page.authors }}</h4>
-  <blockquote><p>{{ page.abstract }}</p></blockquote>
+  <blockquote>{{ page.abstract }}</blockquote>
   {% if page.links %}
   <p>{% for hash in page.links %}
     {% for lnk in hash %}
@@ -13,10 +13,11 @@ layout: card-page
   </p>
   {% endif %}
 
-  {% for tg in page.tags %}
-  <span class="tag tag-primary">{{ tg }}</span>
-  {% endfor %}
-    </div>
+  <p class="tags">
+    {% for tg in page.tags %}
+    <span class="tag tag-primary">{{ tg }}</span>
+    {% endfor %}
+  </p>
 
 {% assign scontent = content|strip %}
 {% unless scontent == "" %}

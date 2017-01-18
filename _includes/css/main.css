@@ -47,7 +47,24 @@ nav .navbar-brand {
 
 article h1 { font-weight: bold; }
 
-blockquote p:before {
+blockquote.excerpt {
+    font-size: smaller;
+}
+
+p.tags {
+    text-align: right;
+}
+
+p.tags .tag {
+    font-size: 95%;
+}
+
+blockquote {
+    margin: 5pt;
+    margin-left: 20pt;
+}
+
+blockquote:before {
     display: inline-block;
     font-family: FontAwesome;
     font-style: normal;
@@ -59,10 +76,11 @@ blockquote p:before {
     box-sizing: inherit;
     margin: 0;
     color: rgba(0,0,0,0.3);
-    margin-left: -15pt;
+    margin-left: -17pt;
+    margin-right: 2pt;
     font-size: 125%;
 }
-blockquote p:after {
+blockquote:after {
     display: inline-block;
     font-family: FontAwesome;
     font-style: normal;
@@ -73,4 +91,9 @@ blockquote p:after {
     content: '\f10e';
     box-sizing: inherit;
     color: rgba(0,0,0,0.3);
+    margin-left: 2pt;
+}
+
+h3 {
+    font-weight: normal;
 }

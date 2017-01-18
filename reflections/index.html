@@ -5,22 +5,20 @@ title: Reflections
 extra_css:
  - /css/blog-index.css
 ---
-
-{% for post in site.posts %}
-{% if post.categories contains "reflections" %}
+{% assign posts = site.posts | sort:'date' | reverse %}
+{% for post in posts %}
 <li class="card">
   <div class="card-block">
   <h2><a href="{{ post.url }}">{{ post.title }} <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h2>
   <div class="secondary-text" style="margin-bottom: 5pt">{{ post.author }} @ {{ post.date | date:"%Y-%m-%d" }}</div>
-  <blockquote class="secondary-text" style="font-size: smaller;">{{ post.excerpt | remove: "<p>" | remove: "</p>" }}</blockquote>
+  <blockquote class="excerpt">{{ post.excerpt | remove: '<p>' | remove: '</p>'}}</blockquote>
   {% unless post.tags.empty? %}
-  <p style="text-align: right;" class="text-right">
+  <p class="tags">
     {% for tg in post.tags %}
-    <span class="tag grey">{{ tg }}</span>
+    <span class="tag blue">{{ tg }}</span>
     {% endfor %}
   </p>
   {% endunless %}
   </div>
 </li>
-{% endif %}
 {% endfor %}

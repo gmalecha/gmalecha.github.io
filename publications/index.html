@@ -1,50 +1,19 @@
 ---
 layout: listing
 title: Publications & Talks
-category: publication
 poster: redwoods
 ---
-
-{% for post in site.posts %}
-{% if post.categories contains "publication" or post.categories contains "talk" %}
+{% assign pubs = site.publications | sort: 'date' | reverse %}
+{% for post in pubs %}
 <li class="card" style="margin-bottom: 20pt; position: relative;">
   <div class="card-block">
-    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
     <h4>{{ post.authors }}</h4>
     <small>{{ post.where }} - {{ post.date | date: "%Y" }}</small>
-    <!-- <p class="card-text"> -->
-    <!--   {{ post.abstract }} -->
-    <!-- </p> -->
-     <div style="text-align: right">
+     <p class="tags">
        {% for tg in post.tags %}
-       <span class="tag grey">{{ tg }}</span>
+       <span class="tag blue">{{ tg }}</span>
        {% endfor %}
-     </div>
+     </p>
 </li>
-{% endif %}
 {% endfor %}
-
-
-{% comment %}
-<div class="row">
-  <div class="{{ site.layout.margin-class-wide }}">
-    <table class="table">
-      <tr><th>At</th>
-	  <th>Title</th></tr>
-      {% for post in site.posts %}
-      {% if post.categories contains "publication" or post.categories contains "talk" %}
-      <tr><td>{% if post.where %}{{ post.where }}{% else %}{{ post.date | date: "%Y" }}{% endif %}</td>
-	  <td><a href="{{ post.url }}">{{ post.title }}</a>
-	    <div class="text-right">
-	    {% for tg in post.tags %}
-	    <span class="tag label label-default">{{ tg }}</span>
-	    {% endfor %}
-	    </div>
-      </td></tr>
-      {% endif %}
-      {% endfor %}
-      </tr>
-    </table>
-  </div>
-</div>
-{% endcomment %}

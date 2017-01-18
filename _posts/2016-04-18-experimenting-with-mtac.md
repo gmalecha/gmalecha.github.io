@@ -1,6 +1,5 @@
 ---
 layout: post
-category: reflections
 tags:
  - coq
  - Mtac

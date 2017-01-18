@@ -33,12 +33,36 @@ color:
 collections:
   publications:
     output: true
-    layout: publication
     permalink: /publication/:path/:title
   posts:
     output: true
-    layout: post
     permalink: /reflection/:year/:path/:title
+
+defaults:
+- scope:
+    path: ""
+    type: publications
+  values:
+    layout: publication
+    section: Publications
+- scope:
+    path: "publications"
+  values:
+    section: Publications
+- scope:
+    path: ""
+    type: posts
+  values:
+    layouts: post
+    section: Reflections
+- scope:
+    path: "reflections"
+  values:
+    section: Reflections
+- scope:
+    path: "projects"
+  values:
+    section: Projects
 
 # Footer settings
 footer:

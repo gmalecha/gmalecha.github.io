@@ -3,7 +3,6 @@ layout: listing
 cards:
 - name
 - pubs
-- projects
 title: Gregory Malecha
 ---
 
@@ -11,21 +10,16 @@ title: Gregory Malecha
 {% for post in posts limit:5 %}
 <li class="card" style="margin-bottom: 20pt;">
   <div class="card-block">
-    <h4 class="card-title">{{ post.title }}</h4>
-    <small>{{ post.date | date: "%b %-d, %Y" }}</small>
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <small>{{ post.author }} - {{ post.date | date: "%b %-d, %Y" }}</small>
     <blockquote class="card-text">
-      {{ post.excerpt | strip }}
+      {{ post.excerpt | remove:'<p>' | remove:'</p>' | strip }}
     </blockquote>
-    <a href="{{ post.url }}" class="btn btn-primary btn-floating btn-action circle">
-      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </a>
   </div>
 </li>
 {% endfor %}
 {% if posts.size > 5 %}
-<li class="card" style="margin-bottom: 20pt;">
-  <div class="card-block">
-    Read more
-  </div>
+<li style="text-align: center;">
+  <a class="btn btn-primary" href="{% link publications/index.html %}">Read more</a>
 </li>
 {% endif %}

@@ -1,56 +1,7 @@
 ---
-layout: default
+layout: card-page
 ---
 
-<article class="container" style="margin-top: -20pt;">
-
-  <!--Card-->
-  <div id="post-card" class="card"
-       style="margin-bottom: 20pt; position: relative;">
-
-    <div class="side-controls" dock-to="post-card"
-	 style="margin-right: -44px; width: 47px; top: 30px; position: absolute; right: 0px;">
-      <ul style="list-item-style: none;" class="a2a_kit">
-{% unless page.disable_comments %}
-	<li style="margin-bottom: 10pt; height: 47px;">
-	  <a href="#comments" title="comment" class="btn btn-circle btn-primary btn-action circle">
-	    <i class="fa fa-comment" aria-hidden="true"></i>
-	  </a>
-	</li>
-{% endunless %}
-{% if page.download_url %}
-	<li style="margin-bottom: 10pt; height: 47px;">
-	  <a href="#" class="btn btn-circle btn-primary btn-action circle">
-	    <i class="fa fa-download" aria-hidden="true"></i>
-	  </a>
-	</li>
-{% endif %}
-	<li style="margin-bottom: 10pt; height: 47px;">
-	  <a href="#" class="btn btn-circle btn-primary btn-action circle"
-	     data-toggle="dropdown" data-dropdown-target="social-share"
-	     aria-haspopup="true" aria-expanded="false">
-	    <i class="fa fa-share-alt" aria-hidden="true"></i>
-	  </a>
-	</li>
-	<li style="margin-bottom: 10pt; height: 47px;">
-	  <a class="btn btn-circle btn-facebook btn-action circle a2a_button_facebook">
-	    <i class="fa fa-facebook" aria-hidden="true"></i>
-	  </a>
-	</li>
-	<li style="margin-bottom: 10pt; height: 47px;">
-	  <a class="btn btn-circle btn-twitter btn-action circle a2a_button_twitter">
-	    <i class="fa fa-twitter" aria-hidden="true"></i>
-	  </a>
-	</li>
-	<li style="margin-bottom: 10pt; height: 47px;">
-	  <a class="btn btn-circle btn-google-plus btn-action circle a2a_button_google_plus">
-	    <i class="fa fa-google-plus" aria-hidden="true"></i>
-	  </a>
-	</li>
-      </ul>
-    </div>
-
-    <div class="card-block">
       <section class="meta-data" title="meta-data">
 	<h1 class="card-title">{{ page.title }}</h1>
 	<small>{{ page.author }} @ {{ page.date | date: "%b %-d, %Y" }}</small>
@@ -58,20 +9,3 @@ layout: default
       <main>
 	{{ content }}
       </main>
-    </div>
-  </div>
-
-{% unless page.disable_comments %}
-  <section class="card comments">
-    <a name="comments"></a>
-    <div class="card-box" style="padding: 20pt;">
-{% include js_disqus.html %}
-    </div>
-  </section>
-{% endunless %}
-
-</article>
-
-<!-- AddToAny BEGIN -->
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
