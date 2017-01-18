@@ -409,7 +409,7 @@ Mtac solidly beats Ltac on most problem sizes for the search but is substantiall
 ### Comparison with Computational Reflection ###
 
 Even after all of the optimization, Mtac is not as fast as
-[computational reflection]({% post_url blog/2016-02-20-rtac-technical-overview %}), e.g. the [Rtac](https://github.com/gmalecha/mirror-core) implementation of cancelation solves problems of size 100 in under a second while Mtac takes 30 seconds on a problem half the size. While it is not very common to have such large problems, it is not uncommon when stitching automation together. For example, program verification might result in tens of calls to an entailment checker each with a goal of perhaps 10 or so conjuncts. Stitching all of these proofs together along with the reasoning about the program can quickly become costly.
+[computational reflection]({% post_url 2016-02-20-rtac-technical-overview %}), e.g. the [Rtac](https://github.com/gmalecha/mirror-core) implementation of cancelation solves problems of size 100 in under a second while Mtac takes 30 seconds on a problem half the size. While it is not very common to have such large problems, it is not uncommon when stitching automation together. For example, program verification might result in tens of calls to an entailment checker each with a goal of perhaps 10 or so conjuncts. Stitching all of these proofs together along with the reasoning about the program can quickly become costly.
 
 ## Final Thoughts ##
 
@@ -422,7 +422,7 @@ Mtac does allow you to write tactics in a typed manner, but it still generates p
 The benefit of Mtac over computational reflection, is that Mtac
 completely avoids the need for a reflective representation which
 decreases the up-front cost to using it and trivially addresses the
-entire language including complex dependent types, which systems like [MirrorCore]({% post_url 2015-01-18-rtac-a-fully-reflective-tactic-language %}) do not currently support (though it is [in progress](//github.com/gmalecha/mirror-core/tree/poly)).
+entire language including complex dependent types, which systems like [MirrorCore]({% link _publications/2015-01-18-rtac-a-fully-reflective-tactic-language.html %}) do not currently support (though it is [in progress](//github.com/gmalecha/mirror-core/tree/poly)).
 
 [^fn-abstract]: ```abstract``` is not strictly necessary here because Mtac's reduction mechanism will not reduce these terms anyways. However, it does hide the proof terms which makes the tactics a little bit easier to read.
 
@@ -430,4 +430,4 @@ entire language including complex dependent types, which systems like [MirrorCor
 
 [^fn-mrun]: ```Mrun``` is not really a "function" in the Coq sense of the term because it does not respect equality. Essentially, if ```a = b```, ```Mrun a``` is *not* necessarily equal to ```Mrun b```.
 
-[^fn-chart]: Results for Ltac and Rtac are taken from [Extensible and Efficient Automation through Reflective Tactics, ESOP'16]({% post_url 2016-01-01-extensible-and-efficient-automation-through-reflective-tactics %}).
+[^fn-chart]: Results for Ltac and Rtac are taken from [Extensible and Efficient Automation through Reflective Tactics, ESOP'16]({% link _publications/2016-01-01-extensible-and-efficient-automation-through-reflective-tactics.html %}).

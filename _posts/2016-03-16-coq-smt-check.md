@@ -12,7 +12,7 @@ title: Using SMT Solvers in Coq 8.5
 During my post-doc at UCSD I've been working on verifying cyber-physical systems in the [VeriDrone](http://veridrone.ucsd.edu) project.
 Cyber-physical systems are just systems that interact with the real world (think quadcopters, cars, planes, hydro-electric dams, and robots).
 The interesting thing about verifying cyber-physical systems in Coq is that they require *a lot* of reasoning about continuous mathematics, real numbers, differential equations, and all that.
-Coq does a great job at all of the discrete reasoning that we do (see my previous blog post on [embedding logics in Coq]({% post_url blog/2015-12-18-embedding-a-logic-in-coq %})) but at the end of all the nice theory, problems often boil down to mundane reasoning about real arithmetic.
+Coq does a great job at all of the discrete reasoning that we do (see my previous blog post on [embedding logics in Coq]({% post_url 2015-12-18-embedding-a-logic-in-coq %})) but at the end of all the nice theory, problems often boil down to mundane reasoning about real arithmetic.
 In this post I'm going to discuss a plugin that I wrote to call SMT solvers from Coq.
 
 **Caveat**: The plugin currently does not import proof objects back into Coq (that is an interesting area of research), so, at least for the time being, you need to ```admit``` the goals that it proves.

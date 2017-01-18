@@ -13,7 +13,7 @@ extra_js_head:
 highlight: true
 ---
 
-In this post I'm going to discuss [Rtac](https://github.com/gmalecha/mirror-core) the reflective tactic language that I developed as a central piece of [my dissertation]({% post_url 2015-02-01-extensible-proof-engineering-in-intensional-type-theory %}).
+In this post I'm going to discuss [Rtac](https://github.com/gmalecha/mirror-core) the reflective tactic language that I developed as a central piece of [my dissertation]({% link _publications/2015-02-01-extensible-proof-engineering-in-intensional-type-theory.html %}).
 The results there show how reflective tactics can be a game-changer in the ability to build very efficient automation.
 For comparison, the automation that I'm going to write in this post is a monoidal cancellation procedure and at the end of the post we'll see that it scales substantially better than Ltac, e.g. on larger problems it is **almost 2 orders of magnitude faster than Ltac**.
 
@@ -25,7 +25,7 @@ opam install coq-mirror-core
 
 ## Reflective Tactics ##
 
-I will not go into the details of what computational reflection is in this post, [I've discussed it in the past]({% post_url blog/2015-10-03-computational-reflection-primer %}). At the high level, we're going to replace a large proof term with a computation and prove that the computation implies the existence of a proof of the property.
+I will not go into the details of what computational reflection is in this post, [I've discussed it in the past]({% post_url 2015-10-03-computational-reflection-primer %}). At the high level, we're going to replace a large proof term with a computation and prove that the computation implies the existence of a proof of the property.
 
 Rtac is a reflective tactic language built on top of the [MirrorCore](https://github.com/gmalecha/mirror-core) library for extensible computational reflection.
 From the client point of view, ```rtac``` tactics are just elements of a data type and sound tactics are those that satisfy a particular property, namely ```rtac_sound```.
@@ -204,7 +204,7 @@ In the case that the second operator is a list of tactics, then we can use the `
 ## Performance ##
 
 Using just the core tactics and tacticals, it is easy to build a tactic that performs monoidal cancellation.
-The code is adapted from the [Ynot cancellation algorithm]({% post_url 2009-08-31-effective-interactive-proofs-for-higher-order-imperative-programs %}).
+The code is adapted from the [Ynot cancellation algorithm]({% link _publications/2009-08-31-effective-interactive-proofs-for-higher-order-imperative-programs.html %}).
 The code (simplified to be in line with this post) is the following:
 
 ~~~coq
@@ -271,7 +271,7 @@ Most of the development time for the reflective automation was spent the syntact
 In this post I gave an overview of Rtac, a full-reflective tactic language.
 Rtac is modeled on Ltac and drastically simplifies the process of writing reflective automation.
 Rtac is *not* meant to replace Ltac, though it is useful as a glue mechanism for other reflective tactics.
-For example, in my work on [MirrorShard]({% post_url 2014-07-14-compositional-computational-reflection %}) I describe how gluing reflective procedures together with reflection is *substantially* more efficient than doing it in Ltac.
+For example, in my work on [MirrorShard]({% link _publications/2014-07-14-compositional-computational-reflection.html %}) I describe how gluing reflective procedures together with reflection is *substantially* more efficient than doing it in Ltac.
 
 The code snippets that I presented are slightly simplified for presentation purposes, but the basic mechanism is the same.
 In a later post I will go through this example in detail, describing all of the pieces and how we put them together.
@@ -282,7 +282,7 @@ MirrorCore is still under development, so if you're interested in using it for a
 
 ### Further Reading ###
 
-The main ideas in this post are covered in [my dissertation]({% post_url 2015-02-01-extensible-proof-engineering-in-intensional-type-theory %}) and [our ESOP'16 paper]({% post_url 2016-01-01-extensible-and-efficient-automation-through-reflective-tactics %}).
+The main ideas in this post are covered in [my dissertation]({% link _publications/2015-02-01-extensible-proof-engineering-in-intensional-type-theory.html %}) and [our ESOP'16 paper]({% link _publications/2016-01-01-extensible-and-efficient-automation-through-reflective-tactics.html %}).
 
 <script type="text/javascript">
     function drawChart() {

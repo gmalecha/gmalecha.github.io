@@ -1,9 +1,0 @@
-<h2>Publications</h2>
-
-<ul>
-{% assign highlighted_publications = site.posts | sort: 'date' | reverse %}
-{% for post in highlighted_publications limit:5 %}
-<li>{{ post.title }}</li>
-
-{% endfor %}
-</ul>
