@@ -8,10 +8,20 @@
       <h4 class="card-title" style="display: inline-block;">Gregory Malecha</h4>
       <p><i class="fa fa-envelope left"></i> gmalecha at gmail</p>
     </div>
-{% comment %}
-    <p class="card-text" style="clear: both">
-      Mullings on computer science and math, from formal methods to machine learning.
-    </p>
-{% endcomment %}
+    <blockquote class="card-text" style="clear: both">
+      {{ site.synopsis }}
+    </blockquote>
+    <div class="social-share"
+	 style="margin-bottom: -10pt;">
+      <ul>{% for network in site.social %}
+	<li>
+	  <a class="btn btn-floating circle btn-{{ network.title }}"
+	     href="{{ network.url }}"
+	     style="display: inline-block;">
+	    <i class="fa fa-{{ network.title }}"></i>
+	  </a>
+	</li>{% endfor %}
+      </ul>
+    </div>
   </div>
 </div>

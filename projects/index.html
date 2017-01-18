@@ -16,7 +16,7 @@ title: Projects
     <p>{{ proj.descr }}</p>
     <p style="text-align: right; margin-top: -15pt;">
       {% capture icon %}{% if proj.url contains 'github.com' %}fa-github{% else %}fa-chevron-right{% endif %}{% endcapture %}
-      <a href="{{ proj.url }}" class="btn btn-primary waves-effect">Check it out <i class="fa {{ icon }} right"></i></a>
+      <a href="{{ proj.url }}" title="{{ proj.title }}" class="btn btn-primary waves-effect">Check it out <i class="fa {{ icon }} right"></i></a>
     </p>
   </div>
   </div>
@@ -29,7 +29,7 @@ title: Projects
     <p>{{ proj.descr }}</p>
     <p style="text-align: right; margin-top: -15pt;">
       {% capture icon %}{% if proj.url contains 'github.com' %}fa-github{% else %}fa-chevron-right{% endif %}{% endcapture %}
-      <a href="{{ proj.url }}" class="btn btn-primary waves-effect">Check it out<i class="fa {{ icon }} right"></i></a>
+      <a href="{{ proj.url }}" title="{{ proj.title }}" class="btn btn-primary waves-effect">Check it out<i class="fa {{ icon }} right"></i></a>
     </p>
   </div>
   <div class="col-md-3">
