@@ -3,8 +3,8 @@ title: Gregory Malecha
 email: gmalecha@gmail.com
 url: https://gmalecha.github.io
 hostname: gmalecha.github.io
-synopsis: Mullings on computer science and math: programming languages, compilers, and program analysis.
-# , from formal methods to machine learning.
+synopsis: >
+  Mullings on computer science and math: programming languages, compilers, and program analysis.
 description:
   I do research on programming languages, program verification, compilers, and program analysis.
 skills: "Programming Languages - Program Verification - Static Analysis - Compilers"
@@ -36,9 +36,11 @@ collections:
   publications:
     output: true
     permalink: /publication/:path/:title
+    section_dir: publications
   posts:
     output: true
     permalink: /reflection/:year/:path/:title
+    section_dir: publications
 
 defaults:
 - scope:
@@ -51,6 +53,7 @@ defaults:
     path: "publications"
   values:
     section: Publications
+    section_dir: publications
 - scope:
     path: ""
     type: posts

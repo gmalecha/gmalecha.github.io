@@ -22,10 +22,13 @@
       Gregory Malecha
     </a>
     {% else %}
-    <a href="{{ top }}" class="navbar-brand">
-      <img style="height: 34px; margin-top: 0pt; margin-bottom: 0pt; margin-right: 5pt;" src="{{ "/img/gregory-malecha.jpg" }}" />
-      {{ site_sep }} {{ page.section }}
-    </a>
+    <div class="navbar-brand">
+      <a href="{{ top }}" style="display: inline;">
+	<img style="height: 34px; margin-top: 0pt; margin-bottom: 0pt; margin-right: 5pt;" src="{{ "/img/gregory-malecha.jpg" }}" />
+      </a>
+      {{ site_sep }}
+      <a href="{{ site.base_url }}{{ site[page.section].section_url }}">{{ page.section }}</a>
+    </div>
     {% endif %}
 
 

@@ -19,6 +19,10 @@ nav a.navbar-brand {
     v-align: middle;
 }
 
+nav .navbar-brand a {
+    color: white;
+}
+
 nav .navbar-brand {
     width: 150px;
 }
