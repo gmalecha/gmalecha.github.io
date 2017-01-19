@@ -35,11 +35,11 @@ color:
 collections:
   publications:
     output: true
-    permalink: /publication/:path/:title
+    permalink: /publications/:title
     section_dir: publications
   posts:
     output: true
-    permalink: /reflection/:year/:path/:title
+    permalink: /reflections/:year/:path/:title
     section_dir: publications
 
 defaults:
