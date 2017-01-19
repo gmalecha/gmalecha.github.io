@@ -4,24 +4,31 @@ layout: card-page
   <h2>{{ page.title }}</h2>
   <h4 class="authors">{{ page.authors }}</h4>
   <blockquote>{{ page.abstract }}</blockquote>
-  {% if page.links %}
-  <p>{% for hash in page.links %}
-    {% for lnk in hash %}
-    <a class="btn btn-primary" href="{{ lnk[1] }}">{{ lnk[0] }}</a>
-    {% endfor %}
-    {% endfor %}
-  </p>
-  {% endif %}
-
   <p class="tags">
     {% for tg in page.tags %}
     <span class="tag tag-primary">{{ tg }}</span>
     {% endfor %}
   </p>
 
+  {% if page.links %}
+  <p>{% for hash in page.links %}
+    {% for lnk in hash %}
+    <a class="btn btn-primary" href="{{ lnk[1] }}">{{ lnk[0] }}{% if lnk[0] == 'download' %}<i class="fa fa-download right"></i>{% endif %}</a>
+    {% endfor %}
+    {% endfor %}
+  </p>
+  {% endif %}
+
 {% assign scontent = content|strip %}
 {% unless scontent == "" %}
-<section class="container">
-  <pre>{{ content|escape }}</pre>
-</section>
+<div class="card">
+    <div class="card-header tag-primary white-text">
+        Featured
+    </div>
+    <div class="card-block">
+        <p class="card-text">
+	  <pre>{{ content|escape }}</pre>
+	</p>
+    </div>
+</div>
 {% endunless %}

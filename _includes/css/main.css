@@ -11,6 +11,10 @@
 .btn-github { background-color: #4183C4; }
 .navbar .nav-item .nav-link .fa { padding-left: 3px; padding-right: 3px; }
 
+body {
+    background-color: #eee;
+}
+
 nav a.navbar-brand {
     white-space: nowrap;
     overflow: hidden;
