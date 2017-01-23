@@ -28,7 +28,7 @@ nav .navbar-brand a {
 }
 
 nav .navbar-brand {
-    width: 150px;
+    width: 200px;
 }
 
 @media (min-width : 768px) {

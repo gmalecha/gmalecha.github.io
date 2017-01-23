@@ -36,11 +36,11 @@ collections:
   publications:
     output: true
     permalink: /publications/:title
-    section_dir: publications
+    section_url: publications
   posts:
     output: true
     permalink: /reflections/:year/:path/:title
-    section_dir: publications
+    section_url: publications
 
 defaults:
 - scope:
@@ -49,6 +49,7 @@ defaults:
   values:
     layout: publication
     section: Publications
+    section_dir: publications
 - scope:
     path: "publications"
   values:
@@ -60,14 +61,17 @@ defaults:
   values:
     layouts: post
     section: Reflections
+    section_dir: reflections
 - scope:
     path: "reflections"
   values:
     section: Reflections
+    section_dir: reflections
 - scope:
     path: "projects"
   values:
     section: Projects
+    section_dir: projects
 
 # Footer settings
 footer:

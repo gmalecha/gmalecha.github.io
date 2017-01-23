@@ -17,7 +17,15 @@
 {% endcase %}
 {% endif %}
 <header>
-  <div class="carousel-item active">
+  <div style="position: relative; z-index: -10;" class="carousel-item active">
+    <!--Mask color-->
+    <div class="view">
+      <img src="{{ poster_image }}" class="img-fluid" alt="">
+      <div class="full-bg-img">
+      </div>
+    </div>
+  </div>
+  <div style="position: fixed; top: 0pt; z-index: -1;" class="carousel-item active">
     <!--Mask color-->
     <div class="view">
       <img src="{{ poster_image }}" class="img-fluid" alt="">
