@@ -3,7 +3,10 @@ layout: card-page
 ---
   <h2>{{ page.title }}</h2>
   <h4 class="authors">{{ page.authors }}</h4>
+  {% assign sabstract = page.abstract|strip %}
+  {% unless sabstract == "" %}
   <blockquote>{{ page.abstract }}</blockquote>
+  {% endunless %}
   <p class="tags">
     {% for tg in page.tags %}
     <span class="tag tag-primary">{{ tg }}</span>
@@ -23,7 +26,7 @@ layout: card-page
 {% unless scontent == "" %}
 <div class="card">
     <div class="card-header tag-primary white-text">
-        Featured
+        Citation (BibTex)
     </div>
     <div class="card-block">
         <p class="card-text">

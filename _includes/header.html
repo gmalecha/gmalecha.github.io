@@ -7,11 +7,13 @@
 {% capture poster_image %}{{ "/img/" }}{{ page.poster }}.jpg{% endcapture %}
 {% else %}
 {% assign random = page.title|length %}
-{% case random|modulo:3 %}
+{% case random|modulo:4 %}
 {% when 0 %}
 {% assign poster_image = "/img/redwoods.jpg" %}
 {% when 1 %}
 {% assign poster_image = "/img/pond.jpg" %}
+{% when 2 %}
+{% assign poster_image = "/img/flight-crop.jpg" %}
 {% else %}
 {% assign poster_image = "/img/franconia.jpg" %}
 {% endcase %}
