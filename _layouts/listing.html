@@ -2,8 +2,6 @@
 layout: default
 ---
 <section class="container-fluid" style="margin-top: -20pt;">
-
-  <!--Card-->
   {% if page.cards %}
   <ul class="col-md-8">
   {% else %}
@@ -13,12 +11,10 @@ layout: default
   </ul>
   {% if page.cards %}
   <div class="col-md-4">
-
     {% for card in page.cards %}
     {% capture incl %}cards/{{ card }}.html{% endcapture %}
     {% include {{incl}} %}
     {% endfor %}
   </div>
   {% endif %}
-
 </section>

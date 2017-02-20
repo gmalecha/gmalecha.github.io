@@ -6,8 +6,8 @@
 {% elsif page.poster %}
 {% capture poster_image %}{{ "/img/" }}{{ page.poster }}.jpg{% endcapture %}
 {% else %}
-{% assign random = page.title|length %}
-{% case random|modulo:4 %}
+{% assign random = page.title|size|modulo:4 %}
+{% case random %}
 {% when 0 %}
 {% assign poster_image = "/img/redwoods.jpg" %}
 {% when 1 %}
