@@ -39,7 +39,7 @@ collections:
     section_url: publications
   posts:
     output: true
-    permalink: /reflections/:year/:month/:title
+    permalink: /reflections/:year/:title
     section_url: publications
 
 defaults:
