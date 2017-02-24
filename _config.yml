@@ -35,7 +35,7 @@ color:
 collections:
   publications:
     output: true
-    permalink: /publications/:title
+    permalink: /publications/:year/:title
     section_url: publications
   posts:
     output: true
