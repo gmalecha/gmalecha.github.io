@@ -8,6 +8,8 @@ tags:
 - data kinds
 - GADT
 highlight: true
+links:
+- gist: "https://gist.github.com/gmalecha/e991916d7c11125e1087216bb621138f"
 ---
 
 In this post I'm going to discuss a problem that I ran into while working with shape indexed types in Haskell and an elgant solution that is inspired by dependent type theory.
@@ -155,6 +157,7 @@ It supplies `ElimNat O` for the first instance of `Dict` and `ElimNat n => ElimN
 In this post I demonstrated a technique for "matching" data kinds by encoding their dependent pattern match within a type-class.
 This technique allows us to encapsulate the pattern match an use it to implement a variety of functions that produce indexed values without consuming an indexed value.
 
+The contents of this post are available [as a gist](https://gist.github.com/gmalecha/e991916d7c11125e1087216bb621138f).
 
 ### Footnotes ###
 
