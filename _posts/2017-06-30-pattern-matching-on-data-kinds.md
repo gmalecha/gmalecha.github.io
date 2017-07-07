@@ -125,17 +125,22 @@ newtype FromList a l = FromList
   { getFromList :: [a] -> Maybe (Vector l a) }
 ```
 
+{% comment %}
 Similarly, it gives us a convenient way to define the instance for `Monad` simply by adding the `ElimNat` constraint.
 
 ```haskell
-instance ElimNat l => Monad (Vector l) where
+bindVector :: Vector l t -> (t -> Vector l u) -> Vector l u
+bindVector Vnil _ = Vnil
+bindVector (Vcons x xs) f = case f x of
+                              Vcons z _ -> Vcons z (bindVector xs $ vtail . f)
+
+instance KnownNat l => Monad (Vector l) where
   return = pure
-  Vnil >>= _ = Vnil
-  (Vcons x xs) >>= f = case f x of
-                         Vcons z _ -> Vcons z (xs >>= f)
+  (>>=) = bindVector
 ```
 
 Note that like this `Monad` instance works like the instances for [`Seq`](https://hackage.haskell.org/package/containers-0.5.10.2/docs/Data-Sequence.html) or [`ZipList`](http://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html#v:ZipList) by zipping the vectors together rather than taking their cross product (which would have a different length).
+{% endcomment %}
 
 # Learning the Structure of a Nat
 
