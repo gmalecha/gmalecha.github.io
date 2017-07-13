@@ -13,7 +13,7 @@ links:
 ---
 
 In this post I'm going to discuss a problem that I ran into while working with shape indexed types in Haskell and an elgant solution that is inspired by dependent type theory.
-The problem is implementing functions that produce values of shape-indexed types *without* accepting a to do case analysis on to refine the index.
+The problem is implementing functions that produce values of shape-indexed types *without* accepting a value to do case analysis on in order to refine the index.
 A simple example arrises when implementing an `Applicative` instance for length indexed vectors.
 
 ```haskell
