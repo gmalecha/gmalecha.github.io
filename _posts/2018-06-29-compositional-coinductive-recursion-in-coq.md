@@ -19,7 +19,8 @@ The problem with this is that co-recursion is notoriously non-compositional in C
 The [paco](https://plv.mpi-sws.org/paco/) work provides a compositional proof rule for co-inductive types, but the is no similar definition for co-inductive definitions.
 In this post I'm going to explain how to build a general recursion combinator in Coq that is completely composable- a surprisingly difficult problem that I pondered for a while in grad school.
 
-The implementation of these ideas can be found in the [coq-interaction-trees](https://github.com/gmalecha/coq-interaction-trees) library, which is a work-in-progress (contributions welcome).
+The implementation of these ideas can be found in the [coq-interaction-trees](https://github.com/gmalecha/coq-interaction-trees) library.
+*EDIT:* Since the original posting, I have started collaborating on these ideas in the [InteractionTrees repository](https://github.com/DeepSpec/InteractionTrees) repository.
 
 ## The Co-inductive Definition
 
@@ -121,7 +122,7 @@ One might think that we can address this problem by inserting the `Delay` into t
 ```coq
 CoFixpoint mfix_attempt2 (f : (a -> Eff eff b) -> a -> Eff eff b)
 : a -> Eff eff b :=
-  Delay (f (mfix f)) .
+  Delay (f (mfix f)).
 ```
 
 Now, if we instantiate `f` with `id` we get the nice (guarded) tower of `Delay`s that we expect.
@@ -185,7 +186,7 @@ This may seem like a tall order, but in actuality it isn't as difficult as one m
 ```coq
 CoFixpoint mfix_attempt
   (f : (a -> Eff eff b) -> (* <-- this arrow! *)
-        a -> Eff eff b))
+        a -> Eff eff b)
 : a -> Eff eff b.
 ```
 
