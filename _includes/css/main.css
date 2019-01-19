@@ -72,8 +72,8 @@ blockquote {
     margin-left: 20pt;
 }
 
-blockquote:before {
-    display: inline-block;
+blockquote p:first-child::before {
+    display: inline;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -88,8 +88,8 @@ blockquote:before {
     margin-right: 2pt;
     font-size: 125%;
 }
-blockquote:after {
-    display: inline-block;
+blockquote p:last-child::after {
+    display: inline;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
