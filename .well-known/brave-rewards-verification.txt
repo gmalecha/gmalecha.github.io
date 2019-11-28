@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: gmalecha.github.io
+Token: a4780a3ee74692eb72a3baafd304d2561508216869e982011a1d994dee5c227e

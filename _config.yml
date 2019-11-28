@@ -112,3 +112,6 @@ projects:
       VeriDrone is exploring foundational verification of cyber-physical
       systems such as quadcopters. Check us out!
     url: http://veridrone.ucsd.edu/
+
+include:
+  - .well-known
