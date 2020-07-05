@@ -95,6 +95,10 @@ kramdown:
 permalink: pretty
 
 projects:
+  - title: cpp2v
+    descr: >
+      Verification infrastructure for C++ built on Coq and the Clang toolchain.
+    url: https://github.com/bedrocksystems/cpp2v
   - title: Mirror Core
     descr: >
       MirrorCore is a framework for easing the burden of building reflective automation in Coq proof assistant.

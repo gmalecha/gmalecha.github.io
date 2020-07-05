@@ -4,13 +4,13 @@ title: Projects
 ---
 
 {% for proj in site.projects %}
-{% capture layout %}{% cycle 'left', 'right' %}{% endcapture %}
+{% capture layout %}{% cycle 'left' %}{% endcapture %}
 {% if layout == 'left' %}
 <li class="card project" title="MirrorCore">
   <div class="card-block container-fluid">
-  <div class="offset-md-1 col-md-3">
-    <img src="http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png" class="logo align-middle img-responsive" />
-  </div>
+  <!-- <div class="offset-md-1 col-md-3"> -->
+  <!--   <img src="http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png" class="logo align-middle img-responsive" /> -->
+  <!-- </div> -->
   <div class="col-md-7">
     <h4>{{ proj.title }}</h4>
     <p>{{ proj.descr }}</p>
@@ -32,9 +32,9 @@ title: Projects
       <a href="{{ proj.url }}" title="{{ proj.title }}" class="btn btn-primary waves-effect">Check it out<i class="fa {{ icon }} right"></i></a>
     </p>
   </div>
-  <div class="col-md-3">
-    <img src="http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png" class="logo align-middle img-responsive" />
-  </div>
+  <!-- <div class="col-md-3"> -->
+  <!--   <img src="http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png" class="logo align-middle img-responsive" /> -->
+  <!-- </div> -->
   </div>
 </li>
 {% endif %}
