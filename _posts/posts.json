@@ -1,0 +1,6 @@
+{
+  "layout": "post",
+  "section": "Reflections",
+  "section_dir": "reflections",
+  "permalink": "/reflections/{{ page.date | date: '%Y' }}/{{ page.fileSlug }}/index.html"
+}

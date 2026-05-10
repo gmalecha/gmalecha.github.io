@@ -3,15 +3,15 @@ layout: listing
 title: Publications & Talks
 poster: redwoods
 ---
-{% assign pubs = site.publications | sort: 'date' | reverse %}
+{% assign pubs = collections.publications | sort: 'date' | reverse %}
 {% for post in pubs %}
 <li class="card" style="margin-bottom: 20pt; position: relative;">
   <div class="card-block">
-    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-    <h5>{{ post.authors }}</h5>
-    <small>{{ post.where }} - {{ post.date | date: "%Y" }}</small>
+    <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+    <h5>{{ post.data.authors }}</h5>
+    <small>{{ post.data.where }} - {{ post.date | date: "%Y" }}</small>
      <p class="tags">
-       {% for tg in post.tags %}
+       {% for tg in post.data.tags %}
        <span class="tag blue">{{ tg }}</span>
        {% endfor %}
      </p>

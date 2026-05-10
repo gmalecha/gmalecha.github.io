@@ -12,7 +12,7 @@ tags:
 mathjax: true
 ---
 
-In [my last post]({% post_url 2018-06-29-compositional-coinductive-recursion-in-coq %}) I presented an implementation of a fixpoint combinator in Coq.
+In [my last post]({{ '/reflections/2018/compositional-coinductive-recursion-in-coq/' | url }}) I presented an implementation of a fixpoint combinator in Coq.
 In this post, I'm going to show how that technique can be used to give a compositional denotational semantics to [Imp, a simple imperative programming language](https://mitpress.mit.edu/books/formal-semantics-programming-languages).
 I'm not going to pretend to cover all the corner cases of C in this post (perhaps a future post), but rather will focus on the general recipe for defining semantics using co-inductive effects.
 
@@ -101,7 +101,7 @@ The cases translate Imp statements into our effectful computation type.
 Sequencing is probably the best example of this where `;` denotes directly to `;;` (`ExtLib's` equivalent of `>>`).
 `Sassign` and `Sif` are similar, denoting the subterms and composing them appropriately.
 The `Swhile` case is the interesting one.
-There, we use the `mfix` operator that [we defined previously]({% post_url 2018-06-29-compositional-coinductive-recursion-in-coq %}) to implement a `while` combinator and use it to give the meaning of the loop[^fn-while-combinator].
+There, we use the `mfix` operator that [we defined previously]({{ '/reflections/2018/compositional-coinductive-recursion-in-coq/' | url }}) to implement a `while` combinator and use it to give the meaning of the loop[^fn-while-combinator].
 
 ## Interpreting the Environment
 

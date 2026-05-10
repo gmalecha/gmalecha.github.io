@@ -1,0 +1,6 @@
+{
+  "layout": "publication",
+  "section": "Publications",
+  "section_dir": "publications",
+  "permalink": "/publications/{{ page.date | date: '%Y' }}/{{ page.fileSlug }}/index.html"
+}

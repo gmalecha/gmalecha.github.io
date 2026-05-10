@@ -5,16 +5,16 @@ title: Reflections
 extra_css:
  - /css/blog-index.css
 ---
-{% assign posts = site.posts | sort:'date' | reverse %}
+{% assign posts = collections.posts | sort:'date' | reverse %}
 {% for post in posts %}
 <li class="card">
   <div class="card-block">
-  <h3><a href="{{ post.url }}">{{ post.title }} <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h3>
-  <div class="secondary-text" style="margin-bottom: 5pt">{{ post.author }} @ {{ post.date | date:"%Y-%m-%d" }}</div>
-  <blockquote class="excerpt">{{ post.excerpt }}</blockquote>
-  {% unless post.tags.empty? %}
+  <h3><a href="{{ post.url }}">{{ post.data.title }} <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></h3>
+  <div class="secondary-text" style="margin-bottom: 5pt">{{ post.data.author }} @ {{ post.date | date:"%Y-%m-%d" }}</div>
+  <blockquote class="excerpt">{{ post | excerpt }}</blockquote>
+  {% unless post.data.tags.empty? %}
   <p class="tags">
-    {% for tg in post.tags %}
+    {% for tg in post.data.tags %}
     <span class="tag blue">{{ tg }}</span>
     {% endfor %}
   </p>

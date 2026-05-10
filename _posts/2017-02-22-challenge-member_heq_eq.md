@@ -44,7 +44,7 @@ Parametricity will guarantee that if we return an `inr pf` for any `pf`, that th
 
 First part of the challenge is to implement `member_heq` **without using any axioms or additional assumptions**.
 If you are going to try to do it with tactics, note that tactics such as `dependent induction` and `dependent destruct` can silently introduce axioms, so you should check the proof at the end with `Print Assumptions member_heq.`.
-Don't forget to [finish your definition with `Defined`]({% post_url 2017-02-18-qed-considered-harmful   %}) or you won't be able to prove anything about the function!
+Don't forget to [finish your definition with `Defined`]({{ '/reflections/2017/qed-considered-harmful/' | url }}) or you won't be able to prove anything about the function!
 
 ## The verification
 
