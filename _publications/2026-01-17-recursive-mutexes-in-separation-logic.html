@@ -1,0 +1,28 @@
+---
+layout: publication
+category: publication
+title: Recursive Mutexes in Separation Logic
+authors: Ke Du, William Mansky, Paolo G. Giarrusso, Gregory Malecha
+where: RocqPL'26
+tags:
+- rocq
+- c++
+- program verification
+- separation logic
+- brick
+- concurrency
+abstract: |
+  Mutexes (i.e., locks) are well understood in separation logic, and can be specified in terms of either protecting an invariant or atomically changing the state of the lock. In this abstract, we develop the same styles of specifications for _recursive_ mutexes, a common variant of mutexes in object-oriented languages like C++ and Java. A recursive mutex can be acquired any number of times by the same thread, and our specifications treat all acquires/releases uniformly, with clients only needing to determine whether they hold the mutex when accessing the lock invariant.
+links:
+ - paper: /publications/recursive-mutexes-in-separation-logic.pdf
+ - conference link: https://popl26.sigplan.org/home/rocqpl-2026#event-overview
+ - talk: https://www.youtube.com/watch?v=xQGS-TzE3YI&list=PLyrlk8Xaylp7-xgHm5A9Tmq8GsTcpjAt_&index=19&pp=iAQB
+---
+@inproceedings{du2026-recursive-mutexes,
+  title={Recursive {M}utexes in {S}eparation {L}ogic},
+  author="Ke Du and William Mansky and Paolo G. Giarrusso and Gregory Malecha",
+  booktitle={Rocq for Programming Languages 2026},
+  location={online},
+  year="2026",
+  month="January"
+}

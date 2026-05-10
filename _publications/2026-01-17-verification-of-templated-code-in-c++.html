@@ -1,0 +1,29 @@
+---
+layout: publication
+category: publication
+title: Verification of Templated Code in C++
+authors: Gregory Malecha, David Swasey, Simon Hudon
+where: RocqPL'26
+tags:
+- rocq
+- c++
+- program verification
+- separation logic
+- brick
+- templates
+abstract: |
+  C++ templates are used pervasively and a major blocker for applying verification to real code bases. We present an approach to verifying templated code that avoids enlarging the trusted computing base of the C++ semantics. Our
+approach uses a shallowly embedded logic that enables reasoning about unresolved symbols as hygienic macros. We have applied our approach to verify several small function templates and used their proofs to derive proofs for concrete instantiations of these functions.
+links:
+ - paper: /publications/verification-of-templated-code-in-c++.pdf
+ - conference link: https://popl26.sigplan.org/home/rocqpl-2026#event-overview
+ - talk: https://www.youtube.com/watch?v=eVPCAmK1_No&list=PLyrlk8Xaylp7-xgHm5A9Tmq8GsTcpjAt_&index=15
+---
+@inproceedings{malecha2026-templates,
+  title={Verification of {T}emplated {C}ode in {C}++},
+  author="Gregory Malecha and David Swasey and Simon Hudon",
+  booktitle={Rocq for Programming Languages 2026},
+  location={online},
+  year="2026",
+  month="January"
+}
