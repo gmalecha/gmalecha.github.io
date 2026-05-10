@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ site.description }}">
 
@@ -36,10 +36,10 @@
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     {% endcomment %}
 
-    {% for css_name in page.extra_css %}
+    {% for css_name in extra_css %}
     <link rel="stylesheet" type="text/css" href="{{ css_name }}">
     {% endfor %}
-    {% for js_name in page.extra_js_head %}
+    {% for js_name in extra_js_head %}
     <script type="application/javascript" src="{{ js_name }}"></script>
     {% endfor %}
     <link rel="stylesheet" type="text/css" href="{{ "/css/syntax.css" }}">

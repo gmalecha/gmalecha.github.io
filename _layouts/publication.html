@@ -1,20 +1,20 @@
 ---
 layout: card-page
 ---
-  <h2>{{ page.title }}</h2>
-  <h4 class="authors">{{ page.authors }}</h4>
-  {% assign sabstract = page.abstract|strip %}
+  <h2>{{ title }}</h2>
+  <h4 class="authors">{{ authors }}</h4>
+  {% assign sabstract = abstract|strip %}
   {% unless sabstract == "" %}
-  <blockquote>{{ page.abstract }}</blockquote>
+  <blockquote>{{ abstract }}</blockquote>
   {% endunless %}
   <p class="tags">
-    {% for tg in page.tags %}
+    {% for tg in tags %}
     <span class="tag tag-primary">{{ tg }}</span>
     {% endfor %}
   </p>
 
-  {% if page.links %}
-  <p>{% for hash in page.links %}
+  {% if links %}
+  <p>{% for hash in links %}
     {% for lnk in hash %}
     <a class="btn btn-primary" href="{{ lnk[1] }}">{{ lnk[0] }}{% if lnk[0] == 'download' %}<i class="fa fa-download right"></i>{% endif %}</a>
     {% endfor %}

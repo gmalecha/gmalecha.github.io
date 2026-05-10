@@ -9,14 +9,14 @@ layout: default
     <div class="side-controls" dock-to="post-card"
 	 style="margin-right: -44px; width: 47px; top: 30px; position: absolute; right: 0px;">
       <ul style="list-item-style: none;" class="a2a_kit">
-{% unless page.disable_comments %}
+{% unless disable_comments %}
 	<li style="margin-bottom: 10pt; height: 47px;">
 	  <a href="#comments" title="comment" class="btn btn-circle btn-primary btn-action circle">
 	    <i class="fa fa-comment" aria-hidden="true"></i>
 	  </a>
 	</li>
 {% endunless %}
-{% if page.download_url %}
+{% if download_url %}
 	<li style="margin-bottom: 10pt; height: 47px;">
 	  <a href="#" class="btn btn-circle btn-primary btn-action circle">
 	    <i class="fa fa-download" aria-hidden="true"></i>
@@ -55,7 +55,7 @@ layout: default
     </div>
   </div>
 
-{% unless page.disable_comments %}
+{% unless disable_comments %}
   <section class="card comments">
     <a name="comments"></a>
     <div class="card-box" style="padding: 20pt;">

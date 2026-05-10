@@ -26,7 +26,7 @@ export default function(eleventyConfig) {
   });
 
   eleventyConfig.addCollection("publications", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("_publications/*.md");
+    return collectionApi.getFilteredByGlob("_publications/*.html");
   });
 
   // Jekyll specific filters used in feed.xml

@@ -2,10 +2,10 @@
 layout: default
 ---
 <article class="container">
-{% unless page.title.blank %}
+{% unless title.blank %}
   <div class="row">
   <div class="{{ site.layout.margin-class }}">
-    <h2>{{ page.title }}</h2>
+    <h2>{{ title }}</h2>
   </div>
   </div>
 {% endunless %}

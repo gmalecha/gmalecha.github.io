@@ -1,12 +1,12 @@
-{% if page.noheader %}
+{% if noheader %}
 <div style="height: 40pt; display: block; "></div>
 {% else %}
-{% if page.poster contains "http:" or page.poster contains "https:" %}
-{% assign poster_image = page.poster %}
-{% elsif page.poster %}
-{% capture poster_image %}{{ "/img/" }}{{ page.poster }}.jpg{% endcapture %}
+{% if poster contains "http:" or poster contains "https:" %}
+{% assign poster_image = poster %}
+{% elsif poster %}
+{% capture poster_image %}{{ "/img/" }}{{ poster }}.jpg{% endcapture %}
 {% else %}
-{% assign random = page.title|size|modulo:4 %}
+{% assign random = title|size|modulo:4 %}
 {% case random %}
 {% when 0 %}
 {% assign poster_image = "/img/redwoods.jpg" %}

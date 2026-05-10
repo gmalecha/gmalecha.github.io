@@ -6,7 +6,7 @@
 */
 var disqus_config = function () {
 this.page.url = "{{ site.url }}{{ page.url }}"; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = "{{ page.title|slugify }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.identifier = "{{ title|slugify }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 (function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');

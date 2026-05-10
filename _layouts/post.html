@@ -2,16 +2,16 @@
 layout: card-page
 ---
       <section class="meta-data" title="meta-data">
-	<h1 class="card-title">{{ page.title }}</h1>
-	<small>{{ page.author }} @ {{ page.date | date: "%b %-d, %Y" }}</small>
+	<h1 class="card-title">{{ title }}</h1>
+	<small>{{ author }} @ {{ page.date | date: "%b %-d, %Y" }}</small>
       </section>
       <main>
 {% comment %}
-	{% if page.links %}
+	{% if links %}
 	<div style="float: right; padding: 10pt; margin-left: 10pt; border: 1pt solid black; background: lightgrey">
 	  <h6>Links</h6>
 	<ul style="list-style: circle;">
-	  {% for lnk in page.links %}
+	  {% for lnk in links %}
 	  {% for link in lnk %}
 	  <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
 	  {% endfor %}
