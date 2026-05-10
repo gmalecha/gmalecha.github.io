@@ -15,10 +15,16 @@ export default function(eleventyConfig) {
     if (post.data.excerpt) return post.data.excerpt;
     if (post.page.excerpt) return post.page.excerpt;
     const content = post.content || '';
-    // simple heuristic: first paragraph
-    const paragraph = content.split('\n\n')[0];
-    // strip HTML tags
-    return paragraph.replace(/(<([^>]+)>)/gi, "");
+    
+    // Find the first <p>...</p> block
+    const match = content.match(/<p>([\s\S]*?)<\/p>/i);
+    if (match) {
+      // Strip HTML tags from the paragraph content
+      return match[1].replace(/(<([^>]+)>)/gi, "").trim();
+    }
+    
+    // Fallback if no <p> tag is found
+    return content.replace(/(<([^>]+)>)/gi, "").trim().substring(0, 200) + "...";
   });
 
   eleventyConfig.addCollection("posts", function(collectionApi) {
