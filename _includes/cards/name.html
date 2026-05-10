@@ -1,8 +1,7 @@
 <div class="card">
   <div class="card-block" style="position: relative;">
     <div style="display: block; float: left; text-align: center; width: 20%; margin-right: 10pt;">
-      <img src="{{ "/img/gregory-malecha-small.jpg" }}"
-	   class="img-responsive">
+      <img src="{{ " /img/gregory-malecha-small.jpg" }}" class="img-responsive">
     </div>
     <div class="align-middle" style="display: block; margin-left: 10pt; v-align: middle;">
       <h4 class="card-title" style="display: inline-block;">Gregory Malecha</h4>
@@ -11,17 +10,5 @@
     <blockquote class="card-text" style="clear: both">
       {{ site.synopsis }}
     </blockquote>
-    <div class="social-share"
-	 style="margin-bottom: -10pt;">
-      <ul>{% for network in site.social %}
-	<li>
-	  <a class="btn btn-floating circle btn-{{ network.title }}"
-	     href="{{ network.url }}"
-	     style="display: inline-block;">
-	    <i class="fa fa-{{ network.title }}"></i>
-	  </a>
-	</li>{% endfor %}
-      </ul>
-    </div>
   </div>
 </div>
