@@ -15,16 +15,26 @@ body {
     background-color: #eee;
 }
 
-nav a.navbar-brand {
+nav a.navbar-brand,
+nav a.navbar-brand:hover,
+nav a.navbar-brand:focus,
+nav a.navbar-brand:active,
+nav a.navbar-brand:visited {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 1pt;
     v-align: middle;
+    color: white !important;
 }
 
-nav .navbar-brand a {
-    color: white;
+nav .navbar-brand,
+nav .navbar-brand a,
+nav .navbar-brand a:hover,
+nav .navbar-brand a:focus,
+nav .navbar-brand a:active,
+nav .navbar-brand a:visited {
+    color: white !important;
 }
 
 nav .navbar-brand {
