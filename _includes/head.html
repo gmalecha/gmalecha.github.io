@@ -6,7 +6,7 @@
     <meta name="description" content="{{ site.description }}">
 
     <script>
-      if (window.location.host == '{{ site.hostname }}' && window.location.protocol != 'https:') { 
+      if (window.location.host == '{{ site.hostname }}' && window.location.protocol != 'https:') {
         window.location.protocol = 'https:';
       }
     </script>
@@ -42,7 +42,9 @@
     {% for js_name in extra_js_head %}
     <script type="application/javascript" src="{{ js_name }}"></script>
     {% endfor %}
-    <link rel="stylesheet" type="text/css" href="{{ "/css/syntax.css" }}">
+    <link
+			href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+			rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

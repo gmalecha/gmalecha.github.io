@@ -1,6 +1,8 @@
 {
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.5"
+    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "prismjs": "^1.30.0"
   },
   "name": "gmalecha.github.io",
   "version": "1.0.0",
