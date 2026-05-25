@@ -70,6 +70,7 @@
     "list-to-array": "^1.1.0",
     "luxon": "^3.7.2",
     "markdown-it": "^14.1.1",
+    "markdown-it-footnote": "^4.0.0",
     "mdurl": "^2.0.0",
     "mime": "^3.0.0",
     "mime-db": "^1.54.0",

@@ -1,11 +1,22 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import markdownIt from 'markdown-it';
+import markdownItFootnote from 'markdown-it-footnote';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default function(eleventyConfig) {
+  // Set up markdown-it with the footnote plugin
+  const markdownLibrary = markdownIt({
+    html: true,
+    breaks: true,
+    linkify: true
+  }).use(markdownItFootnote);
+  
+  eleventyConfig.setLibrary("md", markdownLibrary);
+
   // Set up dynamic 'site' global data to provide 'site.time' (Jekyll compatibility)
   eleventyConfig.addGlobalData("site", () => {
     const siteDataPath = path.join(__dirname, "_data", "site.json");
