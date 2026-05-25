@@ -1,9 +1,26 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default function(eleventyConfig) {
+  // Set up dynamic 'site' global data to provide 'site.time' (Jekyll compatibility)
+  eleventyConfig.addGlobalData("site", () => {
+    const siteDataPath = path.join(__dirname, "_data", "site.json");
+    const rawData = fs.readFileSync(siteDataPath, "utf-8");
+    const siteData = JSON.parse(rawData);
+    siteData.time = new Date();
+    return siteData;
+  });
+
   // Set up excerpt support (equivalent to Jekyll's implicit excerpts)
   eleventyConfig.setFrontMatterParsingOptions({
     excerpt: true,
     excerpt_separator: "<!-- excerpt -->"
   });
+
 
   eleventyConfig.setLiquidOptions({
     dynamicPartials: false
