@@ -3,7 +3,7 @@
   "email": "gmalecha@gmail.com",
   "url": "https://gmalecha.github.io",
   "hostname": "gmalecha.github.io",
-  "synopsis": "Mullings on computer science and math: programming languages, compilers, and program analysis.\n",
+  "synopsis": "Mullings on computer science and math: software verification, programming languages, compilers, and program analysis.\n",
   "description": "I do research on programming languages, program verification, compilers, and program analysis.",
   "skills": "Programming Languages - Program Verification - Static Analysis - Compilers",
   "meta_author": "Gregory Malecha",
@@ -112,9 +112,9 @@
   "permalink": "pretty",
   "projects": [
     {
-      "title": "cpp2v",
-      "descr": "Verification infrastructure for C++ built on Coq and the Clang toolchain.\n",
-      "url": "https://github.com/bedrocksystems/cpp2v"
+      "title": "BRiCk",
+      "descr": "A verification-oriented semantics for C++ develope at BlueRock Security and later at SkyLabs AI.\n",
+      "url": "https://github.com/skylabsai/BRiCk"
     },
     {
       "title": "Mirror Core",
