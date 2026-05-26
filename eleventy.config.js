@@ -69,6 +69,18 @@ export default function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("_publications/*.html");
   });
 
+  eleventyConfig.addCollection("content", function(collectionApi) {
+    // 1. Fetch the individual collections
+    const blogPosts = collectionApi.getFilteredByGlob("_posts/*.md");
+    const newsItems = collectionApi.getFilteredByGlob("_publications/*.html");
+
+    // 2. Combine them into one array
+    const combined = [...blogPosts, ...newsItems];
+
+    // 3. Sort by date (newest first)
+    return combined.sort((a, b) => a.date - b.date);
+  });
+
   // Jekyll specific filters used in feed.xml
   eleventyConfig.addFilter("date_to_rfc822", (date) => {
     if (!date) return "";

@@ -4,16 +4,21 @@ cards:
 - name
 - pubs
 title: Gregory Malecha
+eleventyExcludeFromCollections: true
 ---
 
-{% assign posts = collections.posts | sort: 'date' | reverse %}
+{% assign posts = collections.content | sort: 'date' | reverse %}
 {% for post in posts limit:5 %}
 <li class="card" style="margin-bottom: 20pt;">
   <div class="card-block">
     <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-    <small>{{ post.data.author }} - {{ post.date | date: "%b %-d, %Y" }}</small>
+    <small>{{ post.date | date: "%b %-d, %Y" }}</small>
     <blockquote class="card-text">
+    {%if post.data.abstract %}
+      {{ post.data.abstract | strip }}
+    {%else%}
       {{ post | excerpt | strip }}
+    {%endif%}
     </blockquote>
     {% unless post.data.tags.empty? %}
     <p class="tags">
