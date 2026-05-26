@@ -116,7 +116,7 @@
     "uc.micro": "^2.1.0",
     "unpipe": "^1.0.0",
     "urlpattern-polyfill": "^10.1.0",
-    "ws": "^8.20.0"
+    "ws": "^8.21.0"
   },
   "scripts": {
     "start": "eleventy --serve",
