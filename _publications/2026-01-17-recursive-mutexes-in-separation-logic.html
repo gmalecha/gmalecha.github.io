@@ -11,6 +11,7 @@ tags:
 - separation logic
 - brick
 - concurrency
+- skylabs-ai
 abstract: |
   Mutexes (i.e., locks) are well understood in separation logic, and can be specified in terms of either protecting an invariant or atomically changing the state of the lock. In this abstract, we develop the same styles of specifications for _recursive_ mutexes, a common variant of mutexes in object-oriented languages like C++ and Java. A recursive mutex can be acquired any number of times by the same thread, and our specifications treat all acquires/releases uniformly, with clients only needing to determine whether they hold the mutex when accessing the lock invariant.
 links:
