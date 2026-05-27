@@ -4,7 +4,7 @@ category: reflections
 author: gregory malecha
 title: "Rtac: Reflective Tactics in Coq"
 tags:
-- coq
+- rocq
 - mirror-core
 - rtac
 - computational reflection

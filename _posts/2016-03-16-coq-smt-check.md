@@ -2,9 +2,9 @@
 layout: post
 category: reflections
 tags:
- - coq plugins
+ - rocq plugins
  - SMT
- - coq
+ - rocq
 author: gregory malecha
 title: Using SMT Solvers in Coq 8.5
 ---

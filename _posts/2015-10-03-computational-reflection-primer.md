@@ -5,7 +5,7 @@ author: gregory malecha
 title: The Core of Computational Reflection
 tags:
  - computational reflection
- - coq
+ - rocq
  - tutorial
 highlight: true
 ---

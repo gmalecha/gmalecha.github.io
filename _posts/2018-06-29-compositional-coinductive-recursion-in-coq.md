@@ -4,7 +4,7 @@ category: reflections
 title: Compositional (Co-inductive) Recursion in Coq
 author: gregory malecha
 tags:
-- coq
+- rocq
 - coinduction
 - extensible effects
 - semantics

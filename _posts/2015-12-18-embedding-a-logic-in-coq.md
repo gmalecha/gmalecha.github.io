@@ -4,7 +4,7 @@ category: reflections
 title: Embedding Logics in Coq
 author: gregory malecha
 tags:
-- coq
+- rocq
 - tutorial
 highlight: true
 ---

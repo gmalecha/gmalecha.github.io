@@ -1,7 +1,7 @@
 ---
 layout: post
 tags:
- - coq
+ - rocq
  - Mtac
 title: Experimenting with Mtac
 author: gregory malecha

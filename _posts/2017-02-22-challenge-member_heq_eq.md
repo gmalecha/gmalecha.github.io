@@ -5,7 +5,7 @@ author: gregory malecha
 title: |
   Challenge: member_heq_eq
 tags:
-- coq
+- rocq
 - challenge
 - dependent types
 ---

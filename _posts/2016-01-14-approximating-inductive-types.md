@@ -4,7 +4,7 @@ category: reflections
 author: gregory malecha
 title: Approximating Inductive Types in Coq
 tag:
-- coq
+- rocq
 - type theory
 highlight: true
 ---

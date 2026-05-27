@@ -5,7 +5,7 @@ title: Speeding Up Proofs with Computational Reflection
 author: Gregory Malecha
 where: SF Types, Theorems, and Programming Languages
 tags:
-- coq
+- rocq
 - verification
 - automation
 - reflection

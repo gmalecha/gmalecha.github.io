@@ -4,7 +4,7 @@ category: blog
 title: Qed Considered Harmful
 author: gregory malecha
 tags:
-- coq
+- rocq
 - dependent types
 - qed
 mathjax: true

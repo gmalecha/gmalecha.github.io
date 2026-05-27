@@ -4,7 +4,7 @@ category: reflections
 title: A Denotational Semantics for an Imperative Language
 author: gregory malecha
 tags:
-- coq
+- rocq
 - interaction trees
 - extensible effects
 - semantics
