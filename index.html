@@ -23,7 +23,7 @@ eleventyExcludeFromCollections: true
     {% unless post.data.tags.empty? %}
     <p class="tags">
       {% for tg in post.data.tags %}
-      <span class="tag blue"><a href="/tags/{{ tg | slugify }}">{{ tg }}</a></span>
+      <span class="tag blue"><a href="/tag/{{ tg | slugify }}">{{ tg }}</a></span>
       {% endfor %}
     </p>
     {% endunless %}
