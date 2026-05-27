@@ -122,3 +122,5 @@ h3 {
 .social-share li {
     display: inline-block;
 }
+
+.tag > a { color: white; }
