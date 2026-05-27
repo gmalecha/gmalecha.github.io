@@ -11,11 +11,13 @@
 {% endif %}
 {% assign blog = '/reflections/' %}
 {% assign publications = '/publications/' %}
+{% assign toplevel5 = page.url | slice:0, 5 %}
 
 <!--Navbar-->
 <nav class="navbar navbar-fixed-top navbar-dark" style="background-color: rgba(5,5,10,0.8)">
   <div class="container-fluid">
     <!--Navbar Brand-->
+
     {% if page.url == '/' %}
     <a href="{{ top }}" class="navbar-brand">
       <img style="height: 34px; margin-top: 0pt; margin-bottom: 0pt; margin-right: 5pt;" src="{{ "/img/gregory-malecha-small.jpg" }}" />
@@ -27,7 +29,12 @@
 	<img style="height: 34px; margin-top: 0pt; margin-bottom: 0pt; margin-right: 5pt;" src="{{ "/img/gregory-malecha.jpg" }}" />
       </a>
       {{ site_sep }}
+      {% if toplevel5 == '/tag/' %}
+      {% assign length = page.url.length | minus: 6 %}
+      {{ page.url | slice: 5, length }}
+      {% else %}
       <a href="{{ site.base_url }}/{{ section_dir }}">{{ section }}</a>
+      {% endif %}
     </div>
     {% endif %}
 
