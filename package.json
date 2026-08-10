@@ -19,7 +19,7 @@
     "bcp-47-match": "^2.0.3",
     "bcp-47-normalize": "^2.3.0",
     "binary-extensions": "^2.3.0",
-    "brace-expansion": "^1.1.14",
+    "brace-expansion": "^1.1.18",
     "braces": "^3.0.3",
     "chokidar": "^3.6.0",
     "commander": "^10.0.1",
